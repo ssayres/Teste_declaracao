@@ -19,8 +19,8 @@ Route::get('/', function () {
 
 //rota para os dois usuários
 Route::group(['middleware' => ['auth']], function(){
-Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-});
+    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
