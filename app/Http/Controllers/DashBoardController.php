@@ -23,5 +23,8 @@ class DashBoardController extends Controller
     public function GerarDeclaracao() {
         return view('layouts/GerarDeclaracao');
     }
+    public function Conteudo(Request $request) {
+        return view('layouts/Conteudo', $request->all());
+    }
 
 }

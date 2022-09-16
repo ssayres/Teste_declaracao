@@ -7,10 +7,8 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-        
         <script src="{{asset('js/scripts.js')}}"></script>
         <script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
-
         <style>
             * {
                 margin: 0;
@@ -27,16 +25,53 @@
                 padding: 10px;
             }
 
+            .row {
+                display: flex;
+                flex-flow: row wrap;
+            }
+
+            .col-10 {
+                width: 10%;
+            }
+
+            .col-50 {
+                width: 50%;
+            }
+
             .col-33 {
                 width: 33%;
+            }
+
+            .col-20 {
+                width: 20%;
+            }
+
+            .ml-1 {
+                margin-left: 10%;
             }
 
             .ml-2 {
                 margin-left: 20%;
             }
 
+            .ml-3 {
+                margin-left: 30%;
+            }
+
+            .ml-4 {
+                margin-left: 40%;
+            }
+
             .ml-5 {
                 margin-left: 50%;
+            }
+
+            .bg-red {
+                background-color: red;
+            }
+
+            .bg-blue {
+                background-color: blue;
             }
 
             .centralizar {
@@ -81,26 +116,26 @@
         <div class="container">
             <form name="formulario" class="row" method="post" action="{{route('dashboard.Conteudo')}}">
                 @csrf
-                <h5 class="centralizar"><u> preencha os campos abaixo com os dados de entrega e as informações sobre seu(s) item(s) </u></h5>
+                
                 <div class="row">
                     <div class="col-33 ml-2 campos" style="border-right: none">
-                        <p>Remetente:</p>
+                        <p>ID do produto:</p>
                         <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
                     </div>
                     <div class="col-33 campos">
-                        <p>Destinatário:</p>
+                        <p>Centro de Custo:</p>
                         <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
                     </div>
                     <div class="col-33 ml-2 campos" style="border-right: none">
-                        <p>CNPJ/CPF:</p>
+                        <p>Conteúdo:</p>
                         <x-input id="cnpj" class="block mt-1 w-full" type="text" name="cnpj" />
                     </div>
                     <div class="col-33 campos">
-                        <p>CNPJ/CPF:</p>
+                        <p>Quantidade:</p>
                         <x-input id="cnpj2" class="block mt-1 w-full" type="text" name="cnpj2" />
                     </div>
                     <div class="col-33 ml-2 campos" style="border-right: none">
-                        <p> CEP: </p>
+                        <p> Valor: </p>
                         <x-input id="cep" class="block mt-1 w-full" type="text" name="cep" />
                     </div>
                     <div class="col-33  campos">
@@ -137,30 +172,6 @@
                     </div>
                 </div>
                 <input type="submit" class="butao">
-            </form>
-        </div>
-        <div class="nova">
-            <form name="formulario" class="row" method="post" action="{{route('dashboard.Conteudo')}}">
-                @csrf
-                
-                <div class="col-12">
-                    <div class="col-4 ml-3 campos" style="border-right: none">
-                        <p>ID do produto:</p>
-                        <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
-                        <p>Centro de Custo:</p>
-                        <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
-                        <p>Conteúdo:</p>
-                        <x-input id="cnpj" class="block mt-1 w-full" type="text" name="cnpj" />
-                        <p>Quantidade:</p>
-                        <x-input id="cnpj2" class="block mt-1 w-full" type="text" name="cnpj2" />
-                        <p>Valor:</p>
-                        <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
-                        </div>
-                    <div class="col-4 ml-3 campos">
-                        <p>Resumo:</p>
-                        <x-input id="nome" class="block mt-1 w-full" type="text" name="nome" />
-                    </div>
-                </div>
             </form>
         </div>
 
