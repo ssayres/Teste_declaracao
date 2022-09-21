@@ -18,13 +18,27 @@ class DashBoardController extends Controller
 
 }
 
+
 }
 
     public function GerarDeclaracao() {
         return view('layouts/GerarDeclaracao');
     }
     public function Conteudo(Request $request) {
-        return view('layouts/Conteudo', $request->all());
+        //dd($request->all());
+        return redirect()->route('dashboard.GerarDeclaracao')->with('eae', $request->post());
+        
+        return response()->json(
+            $request);
+
+        return $request->input();
+        
+        
+    
+        
+        //view('layouts/Conteudo', $request->post());
+            
     }
+    
 
 }
