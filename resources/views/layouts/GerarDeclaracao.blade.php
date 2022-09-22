@@ -29,8 +29,8 @@
 
   <body>
     <!-- Container que é o pai de todos os elementos da página. -->
-    <div class="divFormu container responsive-sm">
-      <form action="{{route('dashboard.EnviarAoBanco')}}" method="post" id="form">
+    <form class="divFormu container responsive-sm" action="{{route('dashboard.Conteudo')}}" method="post" id="form">
+      <form class="form-estrutura">
         @csrf
         <div class="row row-cols-12 content-page">
 
@@ -49,7 +49,7 @@
                     <div class="row g-2 my-1">
                       <div class="col-7">
                         <label for="inputNome" class="form-label">Nome:</label>
-                        <input type="text" class="form-control is-valid text-primary" Montserrat-labelledby billing name="nome" placeholder="Digite o nome completo" onfocusout="verificarCampo('inputNome')" required id="validationServer01" aria-describedby="validationTooltipUsernamePrepend">
+                        <input type="text" class="form-control is-valid text-primary" Montserrat-labelledby billing name="remetente" placeholder="Digite o nome completo" onfocusout="verificarCampo('inputNome')" id="remetente" aria-describedby="validationTooltipUsernamePrepend">
                       </div>
 
 
@@ -111,7 +111,7 @@
 
                             <div class="col-7">
                               <label for="inputNome" class="form-label">Nome:</label>
-                              <input list="nomes" type="text" placeholder="Digite o nome completo" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="nome" id="nome" onfocusout="verificarCampo('inputNome')" required>
+                              <input list="nomes" type="text" placeholder="Digite o nome completo" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="destinatario" id="destinatario" onfocusout="verificarCampo('inputNome')" required>
                             </div>
 
 
@@ -167,6 +167,7 @@
             </main>
 
       </form>
+    </form>
     </div>
 
     <!-- Formulário que é exibido a direita da página -->
@@ -178,13 +179,12 @@
         <main>
           <div class="container">
             <div class="form-container">
-              <form name="formulario" class="form-product row g-0 my-0" method="post" id="form2" action="{{route('dashboard.Conteudo')}}">
-                @csrf
+              <form name="formulario" class="form-product row g-0 my-0" id="form2">
                 <p>Formulário</p>
                 <h1>Conteúdo</h1>
                 <div class="col-12">
                   <label for="inputCpfCnpj" class="form-label">ID do Produto:</label>
-                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="idProduto" id="idProduto" onfocusout="verificarCampo('inputNome')" required>
+                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')" required>
                 </div>
 
                 <div class="col-12">
@@ -194,22 +194,23 @@
 
                 <div class="col-12">
                   <label for="inputCpfCnpj" class="form-label">Conteúdo do pacote:</label>
-                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="conteudo" id="conteudo" onfocusout="verificarCampo('inputNome')" required>
+                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="content" id="content" onfocusout="verificarCampo('inputNome')" required>
                 </div>
 
                 <div class="col-12">
                   <label for="inputCpfCnpj" class="form-label">Quantidade de itens enviados:</label>
-                  <input list="" type="number" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="quantidade" id="quantidade" onfocusout="verificarCampo('inputNome')" required>
+                  <input list="" type="number" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="quantity" id="quantity" onfocusout="verificarCampo('inputNome')" required>
                 </div>
 
                 <div class="col-12">
                   <label for="inputCpfCnpj" class="form-label">Valor (R$):</label>
-                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="valor" id="valor" onfocusout="verificarCampo('inputNome')" required>
+                  <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="value" id="value" onfocusout="verificarCampo('inputNome')" required>
                   <br>
                 </div>
-                <button class="btn btn-danger" type="submit" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
+                <button class="btn btn-danger" type="button" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
 
               </form>
+
             </div>
 
             <hr>
@@ -330,9 +331,9 @@
         <script>
           var teste = []
 
-          $('#form2').submit(function(e) {
+          $('#butao2').click(function(e) {
             e.preventDefault()
-            var input_todos = [$('#idProduto').val(), $('#cCusto').val(), $('#conteudo').val(), $('#quantidade').val(), $('#valor').val()]
+            var input_todos = [$('#idProduct').val(), $('#cCusto').val(), $('#content').val(), $('#quantity').val(), $('#value').val()]
             teste.push(input_todos)
             //var produtos = [$('#idProduto').val()]
             //var cCusto = [$('#cCusto').val()]

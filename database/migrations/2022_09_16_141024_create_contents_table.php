@@ -15,8 +15,10 @@ class CreateContentsTable extends Migration
     {
         Schema::create('contents', function (Blueprint $table) {
             $table->unsignedBigInteger('id_product');
-            $table->unsignedBigInteger('enterprise_id');
+            //$table->unsignedBigInteger('enterprise_id');
             $table->unsignedBigInteger('id_user');
+            $table->string('remetente');
+            $table->string('destinatario');
             $table->string('content');
             $table->string('quantity');
             $table->decimal('value');
@@ -26,7 +28,7 @@ class CreateContentsTable extends Migration
             $table->foreign('id_user')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
 
-        $table->primary(['id_product', 'enterprise_id', 'id_user']);
+        $table->primary(['id_product', 'id_user']);
         });
     }
 
