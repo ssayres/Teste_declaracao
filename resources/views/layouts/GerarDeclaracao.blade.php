@@ -151,7 +151,7 @@
                               </div>
                               <div class="col-2">
                                 <label for="inputEstado" class="form-label">Estado:</label>
-                                <input list="nomes" type="text" placeholder="SP" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="estado2" id="estado2" onfocusout="verificarCampo('inputNome')" required>
+                                <input list="nomes" type="text" placeholder="SP" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="uf2" id="uf2" onfocusout="verificarCampo('inputNome')" required>
                               </div>
 
                               <div class="form-check form-switch g-0 my-4 salvar">
@@ -179,7 +179,7 @@
         <main>
           <div class="container">
             <div class="form-container">
-              <form name="formulario" class="form-product row g-0 my-0" id="form2">
+              <div name="formulario" class="form-product row g-0 my-0" id="form2">
                 <p>Formulário</p>
                 <h1>Conteúdo</h1>
                 <div class="col-12">
@@ -209,7 +209,7 @@
                 </div>
                 <button class="btn btn-danger" type="button" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
 
-              </form>
+              
 
             </div>
 
@@ -246,7 +246,7 @@
 
               <div class="col-7">
                 <div class="d-grid my-3">
-                  <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar">Gerar Declaração</button>
+                  <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="funcao_pdf()">Gerar Declaração</button>
                 </div>
               </div>
             </div>
@@ -260,7 +260,7 @@
           new FormMask(document.querySelector("#cnpj2"), "__.___.___/____-__", "_", [".", "-", "/"])
           new FormMask(document.querySelector("#cep"), "_____-___", "_", ["-"])
           new FormMask(document.querySelector("#cep2"), "_____-___", "_", ["-"])
-          new FormMask(document.querySelector("#valor"), "00.000,00", "0", [".", ","])
+          new FormMask(document.querySelector("#value"), "00.000,00", "0", [".", ","])
         </script>
         <script>
           $("#cep").blur(function() {
@@ -320,13 +320,6 @@
               } catch (ex) {}
             });
           });
-
-          $('#idProduto').blur(function() {
-
-            var idProduto = document.getElementById("conteudo").value;
-
-
-          });
         </script>
         <script>
           var teste = []
@@ -361,6 +354,23 @@
 
           });
         </script>
+        <script>
+          function funcao_pdf(){
+            var pegar_dados = document.getElementById('idProduct').innerHTML;
+
+            var janela = window.open('','','width=1000',height="800");
+            janela.document.write('<html><head>');
+          janela.document.write('<title>PDF</title></head>');
+          janela.document.write('body');
+          janela.document.write(pegar_dados);
+          janela.document.write('</body></html>');
+          janela.document.close();
+          janela.print();
+         
+          }
+        </script>
+
+
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </x-app-layout>

@@ -24,6 +24,10 @@ class DashBoardController extends Controller
     public function GerarDeclaracao() {
         return view('layouts/GerarDeclaracao');
     }
+
+    public function Historico() {
+        return view('layouts/Historico');
+    }
     
     
 

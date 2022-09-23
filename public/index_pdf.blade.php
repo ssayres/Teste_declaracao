@@ -15,26 +15,7 @@
     use Jenssegers\Date\Date;
     Date::setLocale('pt');
     $date = Date::now()->format(' d F Y H:i:s');
-   ;
-
-    $senderall = $request['sender'];
-    $sender = $request['sender']['name'];
-    $sender2 = $request['sender']['document'];
-    $sender3 = $request['sender']['address'];
-    $sender4 = $request['sender']['number'];
-    $sender5 = $request['sender']['postalCode'];
-    $sender6 = $request['sender']['city'];
-    $sender7 = $request['sender']['state'];
-
-    $reciver = $request['reciver']['name'];
-    $reciver2 = $request['reciver']['document'];
-    $reciver3 = $request['reciver']['address'];
-    $reciver4 = $request['reciver']['number'];
-    $reciver5 = $request['reciver']['postalCode'];
-    $reciver6 = $request['reciver']['city'];
-    $reciver7 = $request['reciver']['state'];
-
-    $produtos = $request['content'];
+  
     //echo '<pre>';var_dump($produtos);
     //echo '</pre>';
     ?>
@@ -120,12 +101,14 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo $sender ?></td>
-                            <td><?php echo $sender2 ?></td>
-                            <td><?php echo $sender3 . ' -' . ' ' . $sender4 . '<br> ' . $sender5 ?></td>
-                            <td><?php echo $sender6 . '/' . $sender7 ?></td>
+                        @foreach($contents as $content )
+                            <td>{{$content['nome']}}</td>
+                            <td>{{$content['cnpj']}}</td>
+                            <td>{{$content['endereco']}} . ' -' . ' ' . {{$content['numero']}} . '<br> ' . {{$content['cep']}} </td>
+                            <td>{{$content['cidade']}} . '/' . {{$content['uf']}} </td>
                         </tr>
                     </tbody>
+                    @endforeach
                 </table>
             </div>
             <div class="container-fluid">
@@ -138,15 +121,17 @@
                             <th>Endereço</th>
                             <th>Cidade/UF</th>
                         </tr>
-                    </thead>
+                        </thead>
                     <tbody>
                         <tr>
-                            <td><?php echo $reciver ?></td>
-                            <td><?php echo $reciver2 ?></td>
-                            <td><?php echo $reciver3 . ' -' . ' ' . $reciver4 . '<br> ' . $reciver5 ?></td>
-                            <td><?php echo $reciver6 . '/' . $reciver7 ?></td>
+                        @foreach($contents as $content )
+                            <td>{{$content['nome2']}}</td>
+                            <td>{{$content['cnpj2']}}</td>
+                            <td>{{$content['endereco2']}} . ' -' . ' ' . {{$content['numero2']}} . '<br> ' . {{$content['cep2']}} </td>
+                            <td>{{$content['cidade2']}} . '/' . {{$content['uf2']}} </td>
                         </tr>
                     </tbody>
+                    @endforeach
                 </table>
             </div>
         </div>
@@ -169,7 +154,7 @@
                         <td><?php echo $produto['name'] ?></td>
                         <td><?php echo $produto['quantity'] ?></td>
                         <td><?php echo $produto['value'] ?></td>
-                        <td><?php echo $produto['CentroCusto'] ?></td>
+                        <td><?php echo $produto['cCusto'] ?></td>
                     <?php endforeach ?>
                 </tr>
             </tbody>

@@ -29,12 +29,14 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
 
     Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
+    Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
+    Route::post('dashboard/index',[PdfController::class,"CDF"]);
     //Route::get('/dashboard/Conteudo', 'App\Http\Controllers\DashBoardController@Conteudo')->name('dashboard.Conteudo');
     //Route::post('/dashboard/GerarDeclaracao', 'App\Http\Controllers\Declaracao@EnviarAoBanco')->name('dashboard.EnviarAoBanco');
 
 });
 
-    Route::post('/index',[PdfController::class,"CDF"]);
+    
     
 
 
