@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContentsController;
+use App\Http\Controllers\PdfController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
 
     Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
     Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
-    Route::post('dashboard/index',[PdfController::class,"CDF"]);
+    Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::get('/dashboard/Conteudo', 'App\Http\Controllers\DashBoardController@Conteudo')->name('dashboard.Conteudo');
     //Route::post('/dashboard/GerarDeclaracao', 'App\Http\Controllers\Declaracao@EnviarAoBanco')->name('dashboard.EnviarAoBanco');
 

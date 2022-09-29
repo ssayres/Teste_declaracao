@@ -22,10 +22,9 @@ use App\Models\Content;
     <?php
     use Jenssegers\Date\Date;
     Date::setLocale('pt');
-    $date = Date::now()->format(' d F Y ');
+    $date = Date::now()->format(' d F Y H:i:s');
     $content = \App\Models\Content::all();
    
-    
 
     ?>
 
@@ -110,14 +109,14 @@ use App\Models\Content;
                     </thead>
                     <tbody>{
                         <tr>
-                        
-                            <td><?php echo $_REQUEST['remetente'] ?></td>
-                            <td><?php echo $_REQUEST['cnpj'] ?></td>
-                            <td><?echo $_REQUEST['cnpj']  ?>. ' -' . ' ' . {{$content['numero']}} . '<br> ' . {{$content['cep']}} </td>
-                            <td>{{$content['cidade']}} . '/' . {{$content['uf']}} </td>
+                        @foreach($contents as $content )
+                            <td>{{$content->remente}}</td>
+                            <td>{{$content->cnpj}}</td>
+                            <td>{{$content->endereco}} . ' -' . ' ' . {{$content->numero}} . '<br> ' . {{$content->cep}} </td>
+                            <td>{{$content->cidade}} . '/' . {{$content->uf}} </td>
                         </tr>
                     </tbody>
-                   
+                    @endforeach
                 </table>
             </div>
             <div class="container-fluid">
@@ -163,7 +162,7 @@ use App\Models\Content;
                         <td>{{$content['cCusto']}}></td>
                         <td>{{$content['content']}}</td>
                         <td>{{$content['quantity']}}</td>
-                        <td>{{$content['value']}}</td> 
+                        <td>{{$content['value']}}</td>
                         @endforeach
                 </tr>
             </tbody>

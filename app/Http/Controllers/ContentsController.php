@@ -5,6 +5,7 @@ use App\Models\Content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Date\Date;
+use Barryvdh\DomPDF\Facade as PDF;
 use Laratrust\Traits\LaratrustUserTrait;
 
 class ContentsController extends Controller
@@ -47,11 +48,17 @@ class ContentsController extends Controller
         $content->quantity = $request->quantity;
         $content->value = $request->value;
         $content->save();
+
         
+
+        echo json_encode($content);
         
+        //return response()->json(['success' => 'Enviado ao banco com sucesso']);
         return redirect('/dashboard/GerarDeclaracao');
 
+
     }
+
    
     public function Historico(){
 
