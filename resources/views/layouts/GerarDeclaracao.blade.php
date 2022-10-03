@@ -212,7 +212,7 @@
                         <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="value" id="value" onfocusout="verificarCampo('inputNome')" required>
                         <br>
                       </div>
-                      <button class="btn btn-danger" type="button" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
+                      <button class="btn btn-danger" type="submit" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
 
 
 
@@ -232,12 +232,13 @@
                           <th scope="col">#</th>
                         </thead>
                         <tbody id="show">
-
+                          
                         </tbody>
                       </table>
 
 
                     </div>
+                    
 
       </form>
 

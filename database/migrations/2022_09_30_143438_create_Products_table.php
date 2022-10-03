@@ -15,10 +15,13 @@ class CreateProductsTable extends Migration
     {   
         Schema::create('products', function (Blueprint $table) {
             $table->unsignedBigInteger('id_produto');
+            $table->unsignedBigInteger('id_registro');
             $table->unsignedBigInteger('id_empresa');
             $table->string('conteudo');
             $table->timestamps();
             //$table->primary(['id_produto','id_empresa']);
+            $table->foreign('id_registro')->references('id_declaracao')->on('contents')
+            ->onUpdate('cascade')->onDelete('cascade');
             
         });
     }

@@ -1,8 +1,11 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Content;
+use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Date\Date;
 use Barryvdh\DomPDF\Facade as PDF;
@@ -10,22 +13,24 @@ use Laratrust\Traits\LaratrustUserTrait;
 
 class ContentsController extends Controller
 {
-    public function Conteudo(Request $request){
-        
+    public function Conteudo(Request $request)
+    {
+
+
         $content = new Content;
         $id = Auth::id(); // Retrieve the currently authenticated user's ID...
 
-        
-      // returns an instance of the authenticated user...
+
+        // returns an instance of the authenticated user...
         $id = $request->user()->id; // Retrieve the currently authenticated user's ID...
 
-         // Retrieve the currently authenticated user...
+        // Retrieve the currently authenticated user...
         $id = auth()->id();
-       
+
 
         $content->id_user = $id;
-        
-    // Retrieve the currently authenticated user...
+
+        // Retrieve the currently authenticated user...
         $content->remetente = $request->remetente;
         $content->cnpj = $request->cnpj;
         $content->cep = $request->cep;
@@ -49,21 +54,19 @@ class ContentsController extends Controller
         $content->value = $request->value;
         $content->save();
 
-        
-
         echo json_encode($content);
-        
+
         //return response()->json(['success' => 'Enviado ao banco com sucesso']);
-        return redirect('/dashboard/GerarDeclaracao');
+        //return redirect('/dashboard/GerarDeclaracao');
 
 
     }
 
-   
-    public function Historico(){
+
+    public function Historico()
+    {
 
         $data = Content::all();
-        return view('/layouts/Historico',['contents'=>$data]);
+        return view('/layouts/Historico', ['contents' => $data]);
     }
-
 }

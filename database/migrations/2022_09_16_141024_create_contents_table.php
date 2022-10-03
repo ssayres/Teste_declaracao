@@ -14,7 +14,7 @@ class CreateContentsTable extends Migration
     public function up()
     {
         Schema::create('contents', function (Blueprint $table) {
-            $table->unsignedBigInteger('id_declaracao');
+            $table->id('id_declaracao');
             //$table->unsignedBigInteger('enterprise_id');
             //$table->unsignedBigInteger('id_empresa_cliente');
             $table->unsignedBigInteger('id_user');
@@ -48,7 +48,7 @@ class CreateContentsTable extends Migration
             
             
             //'id_empresa_cliente'
-        $table->primary(['id_declaracao', 'id_user']);
+        
         });
     }
 
