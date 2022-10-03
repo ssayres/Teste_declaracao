@@ -113,8 +113,8 @@ use App\Models\Content;
                         
                             <td><?php echo $_REQUEST['remetente'] ?></td>
                             <td><?php echo $_REQUEST['cnpj'] ?></td>
-                            <td><?echo $_REQUEST['cnpj']  ?>. ' -' . ' ' . {{$content['numero']}} . '<br> ' . {{$content['cep']}} </td>
-                            <td>{{$content['cidade']}} . '/' . {{$content['uf']}} </td>
+                            <td><?php echo $_REQUEST['endereco'] ?><br>nº<?php echo $_REQUEST['numero']?><br><?php echo $_REQUEST['complemento']?></td>
+                            <td><?php echo $_REQUEST['cidade'] ?> / <?php echo $_REQUEST['uf'] ?> </td>
                         </tr>
                     </tbody>
                    
@@ -131,16 +131,15 @@ use App\Models\Content;
                             <th>Cidade/UF</th>
                         </tr>
                         </thead>
-                    <tbody>
+                        <tbody>{
                         <tr>
-                        @foreach($contents as $content )
-                            <td>{{$content['destinatario']}}</td>
-                            <td>{{$content['cnpj2']}}</td>
-                            <td>{{$content['endereco2']}} . ' -' . ' ' . {{$content['numero2']}} . '<br> ' . {{$content['cep2']}} </td>
-                            <td>{{$content['cidade2']}} . '/' . {{$content['uf2']}} </td>
+                        
+                            <td><?php echo $_REQUEST['destinatario'] ?></td>
+                            <td><?php echo $_REQUEST['cnpj2'] ?></td>
+                            <td><?php echo $_REQUEST['endereco2'] ?><br>nº<?php echo $_REQUEST['numero2']?><br><?php echo $_REQUEST['complemento2']?></td>
+                            <td><?php echo $_REQUEST['cidade2'] ?> / <?php echo $_REQUEST['uf2'] ?> </td>
                         </tr>
                     </tbody>
-                    @endforeach
                 </table>
             </div>
         </div>
@@ -158,13 +157,11 @@ use App\Models\Content;
             </thead>
             <tbody>
                 <tr>
-                    @foreach ($products as $product) 
-                        <td>{{$content['idProduct']}}</td>
-                        <td>{{$content['cCusto']}}></td>
-                        <td>{{$content['content']}}</td>
-                        <td>{{$content['quantity']}}</td>
-                        <td>{{$content['value']}}</td> 
-                        @endforeach
+                        <td><?php echo $_REQUEST['idProduct'] ?></td>
+                        <td><?php echo $_REQUEST['content'] ?></td>
+                        <td><?php echo $_REQUEST['quantity']?></td>
+                        <td><?php echo $_REQUEST['value'] ?></td>
+                        <td><?php echo $_REQUEST['cCusto'] ?></td> 
                 </tr>
             </tbody>
         </table>

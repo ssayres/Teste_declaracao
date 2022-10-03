@@ -16,6 +16,7 @@ class CreateContentsTable extends Migration
         Schema::create('contents', function (Blueprint $table) {
             $table->unsignedBigInteger('id_declaracao');
             //$table->unsignedBigInteger('enterprise_id');
+            //$table->unsignedBigInteger('id_empresa_cliente');
             $table->unsignedBigInteger('id_user');
             $table->string('remetente');
             $table->string('cnpj');
@@ -43,7 +44,10 @@ class CreateContentsTable extends Migration
 
             $table->foreign('id_user')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
-
+            
+            
+            
+            //'id_empresa_cliente'
         $table->primary(['id_declaracao', 'id_user']);
         });
     }
