@@ -34,21 +34,21 @@ class CreateContentsTable extends Migration
             $table->string('complemento2');
             $table->string('cidade2');
             $table->string('uf2');
-            $table->integer('idProduct');
-            $table->string('cCusto');
-            $table->string('content');
-            $table->string('quantity');
-            $table->decimal('value');
+//            $table->integer('idProduct');
+//            $table->string('cCusto');
+//            $table->string('content');
+//            $table->string('quantity');
+//            $table->decimal('value');
             $table->rememberToken();
             $table->timestamps();
 
             $table->foreign('id_user')->references('id')->on('users')
             ->onUpdate('cascade')->onDelete('cascade');
-            
-            
-            
+
+
+
             //'id_empresa_cliente'
-        
+
         });
     }
 
