@@ -212,7 +212,7 @@
                         <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="value" id="value" onfocusout="verificarCampo('inputNome')" required>
                         <br>
                       </div>
-                      <button class="btn btn-danger" type="submit" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
+                      <button class="btn btn-danger" type="button" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
 
 
 
@@ -232,13 +232,13 @@
                           <th scope="col">#</th>
                         </thead>
                         <tbody id="show">
-                          
+
                         </tbody>
                       </table>
 
 
                     </div>
-                    
+
 
       </form>
 
@@ -273,18 +273,15 @@
       $("#cep").blur(function() {
         // Remove tudo o que não é número para fazer a pesquisa
         var cep = this.value.replace(/[^0-9]/, "");
-
         // Validação do CEP; caso o CEP não possua 8 números, então cancela
         // a consulta
         if (cep.length != 8) {
           return false;
         }
-
         // A url de pesquisa consiste no endereço do webservice + o cep que
         // o usuário informou + o tipo de retorno desejado (entre "json",
         // "jsonp", "xml", "piped" ou "querty")
         var url = "https://viacep.com.br/ws/" + cep + "/json/";
-
         // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
         // caso ocorra algum erro (o cep pode não existir, por exemplo) a
         // usabilidade não seja afetada, assim o usuário pode continuar//
@@ -298,22 +295,18 @@
           } catch (ex) {}
         });
       });
-
       $("#cep2").blur(function() {
         // Remove tudo o que não é número para fazer a pesquisa
         var cep2 = this.value.replace(/[^0-9]/, "");
-
         // Validação do CEP; caso o CEP não possua 8 números, então cancela
         // a consulta
         if (cep2.length != 8) {
           return false;
         }
-
         // A url de pesquisa consiste no endereço do webservice + o cep que
         // o usuário informou + o tipo de retorno desejado (entre "json",
         // "jsonp", "xml", "piped" ou "querty")
         var url = "https://viacep.com.br/ws/" + cep2 + "/json/";
-
         // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
         // caso ocorra algum erro (o cep pode não existir, por exemplo) a
         // usabilidade não seja afetada, assim o usuário pode continuar//
@@ -329,65 +322,65 @@
       });
     </script>
     <script>
-      var teste = []
-
+      let contentItems = []
       $('#butao2').click(function(e) {
         e.preventDefault()
-        var input_todos = [$('#idProduct').val(), $('#cCusto').val(), $('#content').val(), $('#quantity').val(), $('#value').val()]
-        teste.push(input_todos)
-        //var produtos = [$('#idProduto').val()]
-        //var cCusto = [$('#cCusto').val()]
-        //var conteudo = [$('#idProduto').val()]
-        //var quantidade = [$('#quantidade').val()]
-        //var valor = [$('#valor').val()]
-
-        //teste.push(produtos, cCusto, conteudo, quantidade, valor)
-
-
+        let item = {
+            'id_product': $('#idProduct').val(),
+            'cost_center': $('#cCusto').val(),
+            'content': $('#content').val(),
+            'quantity': $('#quantity').val(),
+            'value': $('#value').val(),
+        }
+        contentItems.push(item)
         var show2 = "";
-        teste.forEach(function(e) {
-          show2 += `
+        let cont = 0;
+        contentItems.forEach(function(e) {
+           let form = $('form[name="formGeral"]');
+           let inputProduct = $("<input>").attr("name", "content_items\["+cont+"\]\[id_product\]").attr("type", "hidden").val(e['id_product'])
+           let inputCostCenter = $("<input>").attr("name", "content_items\["+cont+"\]\[cost_center\]").attr("type", "hidden").val(e['cost_center'])
+           let inputContent = $("<input>").attr("name", "content_items\["+cont+"\]\[content\]").attr("type", "hidden").val(e['content'])
+           let inputQuantity = $("<input>").attr("name", "content_items\["+cont+"\]\[quantity\]").attr("type", "hidden").val(e['quantity'])
+           let inputValue = $("<input>").attr("name", "content_items\["+cont+"\]\[value\]").attr("type", "hidden").val(e['value'])
+           form.append(inputProduct)
+           form.append(inputCostCenter)
+           form.append(inputContent)
+           form.append(inputQuantity)
+           form.append(inputValue)
+           show2 += `
                 <tr>
-                    <td>${e[0]}</td>
-                    <td>${e[1]}</td>
-                    <td>${e[2]}</td>
-                    <td>${e[3]}</td>
-                    <td>${e[4]}</td>
+                    <td>${e['id_product']}</td>
+                    <td>${e['cost_center']}</td>
+                    <td>${e['content']}</td>
+                    <td>${e['quantity']}</td>
+                    <td>${e['value']}</td>
                 </tr>
               `
+          cont++;
         })
-
         $('#show').html(show2);
-
       });
     </script>
     <script>
       $(function Enviar() {
-
         $('form[name="formGeral"]').submit(function(e) {
           e.preventDefault();
-
           $.ajax({
             url: "{{route('dashboard.Conteudo')}}",
             type: "POST",
             data: $(this).serialize(),
-            
             success: function() {
               console.log("Dados inseridos com sucesso!");
             },
             error: function(e){
               console.log(e);
             }
-
           });
-
         })
       })
       $(function funcao_pdf() {
-
         $('form[name="formGeral"]').submit(function(e) {
           e.preventDefault();
-
           $.ajax({
             url: "{{route('dashboard.index_pdf')}}",
             type: "POST",
@@ -402,12 +395,9 @@
               link.download = "Declaracao.pdf";
               link.click();
             }
-
           });
-
         })
       })
-
       /*
       function funcao_pdf() {
         var style = "<style>";
@@ -417,7 +407,6 @@
         style = style + "</style>";
         var pegar_dados2 = document.getElementById('remetente').value;
         var janela = window.open('index_pdf', '', 'width=1000', height = "800");
-        
         janela.document.close();
         janela.print();
       };

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\ContentItem;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
 
@@ -15,18 +16,9 @@ class ContentsController extends Controller
 {
     public function Conteudo(Request $request)
     {
-
-
         $content = new Content;
-        $id = Auth::id(); // Retrieve the currently authenticated user's ID...
-
-
-        // returns an instance of the authenticated user...
-        $id = $request->user()->id; // Retrieve the currently authenticated user's ID...
-
         // Retrieve the currently authenticated user...
         $id = auth()->id();
-
 
         $content->id_user = $id;
 
@@ -47,12 +39,19 @@ class ContentsController extends Controller
         $content->complemento2 = $request->complemento;
         $content->cidade2 = $request->cidade;
         $content->uf2 = $request->uf;
-        $content->idProduct = $request->idProduct;
-        $content->cCusto = $request->cCusto;
-        $content->content = $request->content;
-        $content->quantity = $request->quantity;
-        $content->value = $request->value;
         $content->save();
+
+        foreach ($request->content_items as $item) {
+            $contentItem = new ContentItem();
+            $contentItem->id_content = $content->id_declaracao;
+            $contentItem->id_product = $item["id_product"];
+            $contentItem->cost_center = $item["cost_center"];;
+            $contentItem->content = $item["content"];;
+            $contentItem->quantity = intval($item["quantity"]);
+            $contentItem->value = $item["value"];
+            $contentItem->save();
+        }
+
 
         echo json_encode($content);
 
