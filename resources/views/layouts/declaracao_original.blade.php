@@ -8,11 +8,16 @@
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta name="viewport" content=" width=device-width, initial-scale=1.0">
     <meta name="_token" content="{{csrf_token()}}" />
-    <link href="{{ URL::asset('css/declaracao.css') }}" rel="stylesheet" type="text/css"> 
-    <link href="{{ URL::asset('css/ajustes.css') }}" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+    <link href="{{ URL::asset('css/estilo.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/reset.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/bootstrap.mim.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/declaracao.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/navbar.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('css/ajuste.css') }}" rel="stylesheet" type="text/css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
     <script src="{{asset('js/scripts.js')}}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
@@ -39,7 +44,7 @@
                 <div class="form-container">
                   <div class="form-product row g-1 my-0">
 
-                    <p></p>
+                    <p>Formulário</p>
                     <h1>Remetente</h1>
 
                     <div class="row g-2 my-1">
@@ -97,10 +102,10 @@
                           <label class="form-check-label" for="flexSwitchCheckDefault">Salvar formulário remetente?</label>
                         </div>
 
-                        <hr id="phr">
+                        <hr>
 
                         <div class="row g-2 my-0">
-                          <p></p>
+                          <p>Formulário</p>
                           <h1>Destinatário</h1>
 
                           <div class="row g-2 my-0">
@@ -173,44 +178,36 @@
 
               <!-- Div lado -->
               <main>
-              <div class="container">
-        <div class="form-container">
-            <form class="form-product row g-1" novalidate>
-
-            <div class="row g-2 my-0">
-                          <p></p>
-                          <h1>Conteúdo</h1>
-
-                          <div class="row g-2 my-0">
-                    <br>
-                    <div class="col-6">
+                <div class="container">
+                  <div class="form-container">
+                    <div name="formulario" class="form-product row g-0 my-0" id="form2">
+                      <p>Formulário</p>
+                      <h1>Conteúdo</h1>
+                      <div class="col-12">
                         <label for="inputCpfCnpj" class="form-label">ID do Produto:</label>
-                        <input list="" type="text" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')" required/>
-                    </div>
-
-                    <div class="col-6">
-                        <label for="inputCpfCnpj" class="form-label">Centro de custo:</label>
-                        <input list="" type="text" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')" required/>
-                    </div>
-
-                    <div class="col-6">
-                        <label for="inputCpfCnpj" class="form-label">Conteúdo do pacote:</label>
-                        <input list="" type="text" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="content" id="content" onfocusout="verificarCampo('inputNome')" required/>
-                    </div>
-
-                    <div class="col-6">
-                        <label for="inputCpfCnpj" class="form-label">Quantidade de itens enviados:</label>
-                        <input list="" type="number" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="quantity" id="quantity" onfocusout="verificarCampo('inputNome')" required/>
-                    </div>
-
-                    <div class="col-12">
-                        <label for="inputCpfCnpj" class="form-label">Valor (R$):</label>
-                        <input list="" type="" class="form-control text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="value" id="value" onfocusout="verificarCampo('inputNome')" required/>
-                        <br>                    
+                        <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')" required>
                       </div>
-                    
-                </div>
-                
+
+                      <div class="col-12">
+                        <label for="inputCpfCnpj" class="form-label">Centro de custo:</label>
+                        <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')" required>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="inputCpfCnpj" class="form-label">Conteúdo do pacote:</label>
+                        <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="content" id="content" onfocusout="verificarCampo('inputNome')" required>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="inputCpfCnpj" class="form-label">Quantidade de itens enviados:</label>
+                        <input list="" type="number" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="" name="quantity" id="quantity" onfocusout="verificarCampo('inputNome')" required>
+                      </div>
+
+                      <div class="col-12">
+                        <label for="inputCpfCnpj" class="form-label">Valor (R$):</label>o
+                        <input list="" type="text" class="form-control is-invalid text-primary" Montserrat-labelledby billing placeholder="R$0,00" name="value" id="value" onfocusout="verificarCampo('inputNome')" required>
+                        <br>
+                      </div>
                       <button class="btn btn-danger" type="button" name="botaoAdd" id="butao2">Adicionar conteúdo</button>
 
 
@@ -218,12 +215,7 @@
                     </div>
 
                     <hr>
-                    <div class="row g-2 my-0">
-                    
-                          <h1></h1>
 
-                          <div class="row g-2 my-0">
-                    
                     <div class="row g-2 my-0 tabela">
 
                       <table class="table table-bordered">
@@ -242,7 +234,6 @@
 
 
                     </div>
-                          </div>
 
 
       </form>

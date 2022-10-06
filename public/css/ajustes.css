@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
+@import '~mdb-ui-kit/css/mdb.min.css';
+
+@keyframes pular {
+    0%, 20%, 60%, 100% {
+        -webkit-transform: translateY(0);
+        transform: translateY(0);
+    }
+    40% {
+        -webkit-transform: translateY(-20px);
+        transform: translateY(-20px);
+    }
+    80% {
+        -webkit-transform: translateY(-10px);
+        transform: translateY(-10px);
+    }
+}
+
+:root {
+    --cor-de-fundo: #E7E6E6B7;
+    --fonte-principal: 'Montserrat', sans-serif !important;
+    --cor-color-shadow: #000000;
+    --cor-drop-shadow: #1F1E1ECB;
+    --branco: #FFFFFF;
+    --branco2: #D3D3D3;
+    --cinza: #4747474B;
+    --cor-azul0: #5356ffa1;
+    --cor-azul1: #ADCFFC;
+    --cor-laranja0: #FCCB90;
+    --cor-laranja1: #FF8B06;
+    --cor-laranja2: #FF7300;
+    --cor-laranja3: #FC5C00;
+    --cor-vermelho0: #FF0000;
+    --cor-vermelho1: #A00000;
+    --cor-sombra: #3F3F3FBD;
+    --cor-borda: #000000;
+}
+
+.container {
+    margin: 0.75rem auto 0.75rem auto;
+    padding-bottom: 10px;
+    border-radius: .625rem;
+    width: 50.2rem;
+}
+
+.cascading-right {
+    border-radius: 1.5rem !important;
+    border-width: 0 10px 12px 0;
+}
+
+.card {
+    border-width: 0 10px 12px 0;
+    border-style: solid;
+    border-color: var(--cor-laranja1);
+    box-shadow: 4px 5px 15px var(--cor-sombra);
+}
+
+.card-body {
+    border-radius: 1.5rem !important;
+    border-width: 0 10px 12px 0;
+    border-style: solid;
+    border-color: var(--cor-laranja1);
+    box-shadow: 4px 5px 15px var(--cor-sombra);
+}
+
+.form-check-input {
+    background-color: var(--cor-laranja1) !important;
+    border-color: var(--cor-laranja1) !important;
+}
+
+.form-label {
+    color: var(--cor-laranja1) !important;
+}
+
+.cascading-right {
+    margin-right: -50px;
+}
+
+.bg-white {
+    border-radius: 1.5rem !important;
+    border-width: 4 8px 4px 0 !important;
+    border-style: solid !important;
+    border-color: var(--cor-laranja1) !important;
+    box-shadow: 4px 5px 15px var(--cor-sombra) !important;
+}
+
+.btn-danger {
+    left: 1rem !important;
+    position: relative !important;
+    display: block !important;
+}
+
+@media (max-width: 991.98px) {
+    .cascading-right {
+        margin-right: 0;
+    }
+}
