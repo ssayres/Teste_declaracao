@@ -66,7 +66,9 @@ class ContentsController extends Controller
     {
 
         $data = Content::all();
-        $datas = ContentItem::all();
-        return view('/layouts/Historico', ['contents' => $data],['contentItems' => $datas]);
+        
+        return view('/layouts/Historico', ['contents' => $data]);
+        
     }
+    
 }

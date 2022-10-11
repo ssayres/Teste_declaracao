@@ -58,9 +58,12 @@
               <td>{{$content['destinatario']}}</td>
               <td>{{$content['created_at']}}</td>
              
-            <td> <x-nav-link :href="route('dashboard.Historico')" id="button-5" :active="request()->routeIs('dashboard.Historico')">
-                        {{ __('Detalhar') }}
-                    </x-nav-link></td> 
+            <td> <x-nav-link :href="route('dashboard.getPDF')" id="button-5" :active="request()->routeIs('dashboard.getPDF')">
+            {{ __('Detalhar ✉') }}
+                    </x-nav-link>>
+                       
+</td> 
+
               <!-- <td>{{$content['content']}}</td> -->
               <!-- <td>{{$content['quantity']}}</td> -->
               <!-- <td>{{$content['value']}}</td> -->
@@ -114,7 +117,30 @@ $("input").on("input.highlight", function() {
   var search = $(this).val();
   $("#context").unmark().mark(search);
 }).trigger("input.highlight").focus();
-});</script>
+});
+
+$(function funcao_pegar() {
+          $('form[name="formGeral"]').submit(function(e) {
+              e.preventDefault();
+              $.ajax({
+                  url: "{{route('dashboard.index_pdf')}}",
+                  type: "POST",
+                  data: $(this).serialize(),
+                  xhrFields: {
+                    responseType: 'blob'
+                  },
+                  success: function(response) {
+                    var blob = new Blob([response]);
+                    var link = document.createElement('a');
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = "Declaracao.pdf";
+                    link.click();
+                }
+              });
+          })
+        })
+
+</script>
 </x-app-layout>
 </body>
 </html>
