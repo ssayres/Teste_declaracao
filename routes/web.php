@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
     Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
     Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
-    Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF' )->name('dashboard.getPDF');
+    Route::get('/dashboard/getPDF/{contents}','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
     Route::get('/dashboard/downloadPDF','App\Http\Controllers\PdfController@downloadPDF' )->name('dashboard.downloadPDF');
     //Route::get('/dashboard/Conteudo', 'App\Http\Controllers\DashBoardController@Conteudo')->name('dashboard.Conteudo');
     //Route::post('/dashboard/GerarDeclaracao', 'App\Http\Controllers\Declaracao@EnviarAoBanco')->name('dashboard.EnviarAoBanco');

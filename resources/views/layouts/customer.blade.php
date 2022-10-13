@@ -97,6 +97,7 @@ use App\Models\Content;
         <div class=" row col-6">
             <div class="container-fluid">
     </br>       @foreach($contents as $content )
+             
                 <table class="bordered striped ">
                     <caption>Remetente</caption>
                     <thead>
@@ -110,13 +111,13 @@ use App\Models\Content;
                     <tbody>{
                         <tr>
                         
-                            <td>{{$content->remente}}</td>
+                            <td>{{$content['remetente']}}</td>
                             <td>{{$content->cnpj}}</td>
                             <td>{{$content->endereco}} . ' -' . ' ' . {{$content->numero}} . '<br> ' . {{$content->cep}} </td>
                             <td>{{$content->cidade}} . '/' . {{$content->uf}} </td>
                         </tr>
                     </tbody>
-                    @endforeach
+                   
                 </table>
             </div>
             <div class="container-fluid">
@@ -132,15 +133,15 @@ use App\Models\Content;
                         </thead>
                     <tbody>
                         <tr>
-                        @foreach($contents as $content )
+                        
                             <td>{{$content['destinatario']}}</td>
                             <td>{{$content['cnpj2']}}</td>
                             <td>{{$content['endereco2']}} . ' -' . ' ' . {{$content['numero2']}} . '<br> ' . {{$content['cep2']}} </td>
                             <td>{{$content['cidade2']}} . '/' . {{$content['uf2']}} </td>
                         </tr>
                     </tbody>
-                    
                     @endforeach
+                  
                 </table>
             </div>
         </div>
@@ -158,13 +159,14 @@ use App\Models\Content;
             </thead>
             <tbody>
                 <tr>
-                    @foreach ($content_items as $content) 
+                @foreach ($content_items as $content)
                         <td>{{$content['idProduct']}}</td>
                         <td>{{$content['cCusto']}}></td>
                         <td>{{$content['content']}}</td>
                         <td>{{$content['quantity']}}</td>
                         <td>{{$content['value']}}</td>
                         @endforeach
+                       
                 </tr>
             </tbody>
         </table>

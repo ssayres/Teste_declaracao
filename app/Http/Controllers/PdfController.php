@@ -7,8 +7,13 @@ use Illuminate\Http\Request;
 use App\Models\Content;
 use App\Models\ContentItem;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Jenssegers\Date\Date;
+ 
 
 
+?>
+
+<?php
 class PdfController extends Controller
 {
     public function CDF(Request $request)
@@ -31,17 +36,28 @@ class PdfController extends Controller
         $dompdf->render();
 
         //Gerar o PDF
-        $dompdf->stream('pdf.pdf', ["Attachment" => false]);
+        $dompdf ->stream('pdf.pdf', ["Attachment" => false]);
+        $output = $dompdf->output();
+        $fileCount = count (glob ('PDF/*.pdf'));
+        $newName = ( $fileCount + 1) . '.pdf';
+        file_put_contents('PDF/'.$newName, $output);
     
     }
 
-    public function getPDF()
+    public function getPDF($contents)
     {
         
 
-        $content_items = ContentItem::all();
-        $contents = Content::all();
-        return view('layouts/customer', compact('content_items', 'contents'));
+        //$content_items = ContentItem::all();
+        //$contents = Content::select('select id_declaracao from contents where id_declaracao = ?', [$contents]);
+
+        //return response()->json(
+          //  $contents
+ 
+         //);  
+        
+         //fopen('PDF/'.$contents, '.pdf');
+        //return view('layouts/customer', compact('content_items', 'contents'));
         //$dompdf->loadHtml("<h1>Teste PDF<h1>");
 
     }

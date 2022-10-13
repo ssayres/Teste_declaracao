@@ -1,9 +1,8 @@
-<?php 
+<?php
 namespace App\Http\Controllers;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\Content;
-
 ?>
 
 <!DOCTYPE html>
@@ -13,7 +12,7 @@ use App\Models\Content;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title> 
+    <title>Document</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 
 
@@ -22,10 +21,8 @@ use App\Models\Content;
     <?php
     use Jenssegers\Date\Date;
     Date::setLocale('pt');
-    $date = Date::now()->format(' d F Y H:i:s');
+    $date = Date::now()->format(' d F Y ');
     $content = \App\Models\Content::all();
-   
-
     ?>
 
     <style>
@@ -35,23 +32,19 @@ use App\Models\Content;
         caption {
             border: 1px solid black;
         }
-
         table {
             margin: auto;
             border-collapse: collapse;
         }
-
         th,
         td {
             padding: 10px;
             text-align: center;
             width: 100px;
         }
-
         th {
             font-weight: bold;
         }
-
         caption {
             font-family: 'Roboto Slab';
             text-align: center;
@@ -59,24 +52,19 @@ use App\Models\Content;
             font-size: 20;
             color: 	white;
             background-color: #cfcdcd !important;
-            
         }
-
         page[size="A4"] {
             width: 21cm;
             height: 29.7cm;
         }
-
         page[size="A4"][layout="portrait"] {
             width: 29.7cm;
             height: 21cm;
         }
         HR {
-            
             margin-right: 5rem;
         }
         .assinatura {
-            
             margin-right: 12rem;
         }
         .declaracao {
@@ -87,7 +75,6 @@ use App\Models\Content;
             margin-left: 0.5rem;
             margin-right: 0.2rem;
         }
-
     </style>
 
 </head>
@@ -109,14 +96,14 @@ use App\Models\Content;
                     </thead>
                     <tbody>{
                         <tr>
-                        @foreach($contents as $content )
-                            <td>{{$content->remente}}</td>
-                            <td>{{$content->cnpj}}</td>
-                            <td>{{$content->endereco}} . ' -' . ' ' . {{$content->numero}} . '<br> ' . {{$content->cep}} </td>
-                            <td>{{$content->cidade}} . '/' . {{$content->uf}} </td>
+
+                            <td><?php echo $_REQUEST['remetente'] ?></td>
+                            <td><?php echo $_REQUEST['cnpj'] ?></td>
+                            <td><?php echo $_REQUEST['endereco'] ?><br>nº<?php echo $_REQUEST['numero']?><br><?php echo $_REQUEST['complemento']?></td>
+                            <td><?php echo $_REQUEST['cidade'] ?> / <?php echo $_REQUEST['uf'] ?> </td>
                         </tr>
                     </tbody>
-                    @endforeach
+
                 </table>
             </div>
             <div class="container-fluid">
@@ -130,16 +117,15 @@ use App\Models\Content;
                             <th>Cidade/UF</th>
                         </tr>
                         </thead>
-                    <tbody>
+                        <tbody>{
                         <tr>
-                        @foreach($contents as $content )
-                            <td>{{$content['destinatario']}}</td>
-                            <td>{{$content['cnpj2']}}</td>
-                            <td>{{$content['endereco2']}} . ' -' . ' ' . {{$content['numero2']}} . '<br> ' . {{$content['cep2']}} </td>
-                            <td>{{$content['cidade2']}} . '/' . {{$content['uf2']}} </td>
+
+                            <td><?php echo $_REQUEST['destinatario'] ?></td>
+                            <td><?php echo $_REQUEST['cnpj2'] ?></td>
+                            <td><?php echo $_REQUEST['endereco2'] ?><br>nº<?php echo $_REQUEST['numero2']?><br><?php echo $_REQUEST['complemento2']?></td>
+                            <td><?php echo $_REQUEST['cidade2'] ?> / <?php echo $_REQUEST['uf2'] ?> </td>
                         </tr>
                     </tbody>
-                    @endforeach
                 </table>
             </div>
         </div>
@@ -156,15 +142,15 @@ use App\Models\Content;
                 </tr>
             </thead>
             <tbody>
+            <?php foreach($_REQUEST['content_items'] as $contentItem) { ?>
                 <tr>
-                    @foreach ($products as $product) 
-                        <td>{{$content['idProduct']}}</td>
-                        <td>{{$content['cCusto']}}></td>
-                        <td>{{$content['content']}}</td>
-                        <td>{{$content['quantity']}}</td>
-                        <td>{{$content['value']}}</td>
-                        @endforeach
+                    <td><?php echo $contentItem["id_product"] ?></td>
+                    <td><?php echo $contentItem["content"] ?></td>
+                    <td><?php echo $contentItem["quantity"] ?></td>
+                    <td><?php echo $contentItem["value"] ?></td>
+                    <td><?php echo $contentItem["cost_center"] ?></td>
                 </tr>
+            <?php } ?>
             </tbody>
         </table>
         <table class="bordered striped ">
@@ -177,7 +163,7 @@ use App\Models\Content;
             <p ALIGN=RIGHT class=assinatura>ASSINATURA </p>
         </table>
         </div>
-        
+
 </body>
 </page>
 
