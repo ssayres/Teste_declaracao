@@ -25,7 +25,7 @@
 
   <body>
     <!-- Container que é o pai de todos os elementos da página. action="{{route('dashboard.Conteudo')}}" method="post" -->
-    <form class="divFormu container responsive-sm" id="formGeral" name="formGeral">
+    <form class="divFormu container responsive-sm" id="formGeral" name="formGeral" enctype="multipart/form-data">
       <form class="form-estrutura">
         @csrf
         <div class="row row-cols-12 content-page">
@@ -259,7 +259,7 @@
 
                       <div class="col-7">
                         <div class="d-grid my-3">
-                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar().funcao_pdf()">Gerar Declaração</button>
+                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar().funcao_pdf().store()">Gerar Declaração</button>
                         </div>
                       </div>
                     </div>
@@ -407,6 +407,22 @@
                 
                 // window.open(link, '_blank');
 
+              }
+            });
+          })
+        })
+        $(function store() {
+          $('form[name="formGeral"]').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+              url:"{{route('dashboard.store')}}",
+              type: "POST",
+              data: $(this).serialize(),
+              success: function() {
+                console.log("Dados inseridos com sucesso!");
+              },
+              error: function(e) {
+                console.log(e);
               }
             });
           })
