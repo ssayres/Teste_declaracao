@@ -7,5 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Asset extends Model
 {
-    use HasFactory;
+   use HasFactory;
+
+   protected $fillable = [
+    'id_file',
+    'file',
+    
+];
+
+   
 }

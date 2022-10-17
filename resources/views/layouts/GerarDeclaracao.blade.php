@@ -259,14 +259,13 @@
 
                       <div class="col-7">
                         <div class="d-grid my-3">
-                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar().funcao_pdf().store()">Gerar Declaração</button>
+                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar().funcao_pdf()">Gerar Declaração</button>
                         </div>
                       </div>
                     </div>
       </form>
       </main>
-
-
+      </form>
       <script>
         new FormMask(document.querySelector("#cnpj"), "__.___.___/____-__", "_", [".", "-", "/"])
         new FormMask(document.querySelector("#cnpj2"), "__.___.___/____-__", "_", [".", "-", "/"])
@@ -411,23 +410,7 @@
             });
           })
         })
-        $(function store() {
-          $('form[name="formGeral"]').submit(function(e) {
-            e.preventDefault();
-            $.ajax({
-              url:"{{route('dashboard.store')}}",
-              type: "POST",
-              data: $(this).serialize(),
-              success: function() {
-                console.log("Dados inseridos com sucesso!");
-              },
-              error: function(e) {
-                console.log(e);
-              }
-            });
-          })
-        })
-
+       
         function removerElemento(elementoClicado) {
           elementoClicado.closest("tr").remove();
         }

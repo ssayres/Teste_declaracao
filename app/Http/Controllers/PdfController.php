@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Response;
 use App\Models\Content;
 use App\Models\Asset;
 use Illuminate\Support\Facades\DB;
@@ -43,6 +45,7 @@ class PdfController extends Controller
         $output = $dompdf->output();
         $fileCount = count(glob('storage/PDF/*.pdf'));
         $newName = ($fileCount + 1) . '.pdf';
+        file_put_contents('storage/PDF/'.$newName, $output);
         //$contents = Content::select('select id_declaracao from contents where id_declaracao = ?', [$contents]);
         //return response()->json(
         //  $contents
@@ -54,6 +57,19 @@ class PdfController extends Controller
 
     }
 
+    public function getPDF(){
+
+        $filename = '3.pdf';
+        $file = storage_path(). "/app/public/PDF/". $filename;
+
+        $name = "Declaração Segunda via.pdf";
+    
+        $headers = ['Content-Type: application/pdf'];
+    
+        return Response::download($file, $name, $headers);
+    
+    
+
 }
 
-   
+}

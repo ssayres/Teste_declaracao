@@ -14,4 +14,8 @@ class Content extends Model {
     {
         $this->hasMany(ContentItem::class, "id_content", "id_declaracao");
     }
+    public function Assets()
+    {
+        $this->hasMany(Asset::class, "id_file", "id_declaracao");
+    }
 }

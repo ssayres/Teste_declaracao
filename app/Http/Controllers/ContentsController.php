@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Content;
+use App\Models\Asset;
 use App\Models\ContentItem;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
@@ -41,6 +42,15 @@ class ContentsController extends Controller
         $content->uf2 = $request->uf;
         $content->save();
 
+        $data = new Asset();
+        $data ->id_file = $content->id_declaracao;
+        $fileCount = count(glob('storage/PDF/*.pdf'));
+        $newName = ($fileCount + 1) . '.pdf';
+        $data->file = storage_path('PDF/'.$newName);
+        $data->save();
+       
+
+
         foreach ($request->content_items as $item) {
             $contentItem = new ContentItem();
             $contentItem->id_content = $content->id_declaracao;
@@ -50,6 +60,12 @@ class ContentsController extends Controller
             $contentItem->quantity = intval($item["quantity"]);
             $contentItem->value = $item["value"];
             $contentItem->save();
+
+
+
+
+
+            
         }
 
 
