@@ -17,6 +17,7 @@ use App\Http\Controllers\PdfController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+    
 });
 
-//Route::post('/index',[PdfController::class,"CDF"]);
+Route::get('dashboard/products/{id}','App\Http\Controllers\ProductsController@products')->name('dashboard.products');

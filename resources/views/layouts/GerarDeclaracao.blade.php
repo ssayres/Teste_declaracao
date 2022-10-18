@@ -185,7 +185,7 @@
                           <br>
                           <div class="col-6">
                             <label for="inputCpfCnpj" class="form-label">ID do Produto:</label>
-                            <input list="" type="text" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')" required />
+                            <input list="" type="text" class="form-control text-primary" Montserrat-labelledby billing placeholder="" name="idProduct" id="idProduct" onclick="formatKeyUP()" onfocusout="verificarCampo('inputNome')" required />
                           </div>
 
                           <div class="col-6">
@@ -416,6 +416,21 @@
           elementoClicado.closest("tr").remove();
         }
 
+        function formatKeyUP(){
+          axios.get("http://localhost:8000/api/dashboard/products/"+this.IdProduct)
+        .then((response) => {
+         if(response.data.length === 1){
+           this.value = response.data[0].valor+",00";
+           this.content = response.data[0].conteudo;
+           //console.log(response.data[0].valor);
+         } else {
+          this.value = "Id não encontrado";
+           this.content = "Id não encontrado";
+
+         }
+        });
+      }
+      
         /*
         function funcao_pdf() {
           var style = "<style>";
