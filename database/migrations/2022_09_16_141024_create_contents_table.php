@@ -34,6 +34,7 @@ class CreateContentsTable extends Migration
             $table->string('complemento2');
             $table->string('cidade2');
             $table->string('uf2');
+            $table->string('file');
 //            $table->integer('idProduct');
 //            $table->string('cCusto');
 //            $table->string('content');

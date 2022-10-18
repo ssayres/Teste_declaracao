@@ -40,14 +40,10 @@ class ContentsController extends Controller
         $content->complemento2 = $request->complemento;
         $content->cidade2 = $request->cidade;
         $content->uf2 = $request->uf;
-        $content->save();
-
-        $data = new Asset();
-        $data ->id_file = $content->id_declaracao;
         $fileCount = count(glob('storage/PDF/*.pdf'));
         $newName = ($fileCount + 1) . '.pdf';
-        $data->file = storage_path('PDF/'.$newName);
-        $data->save();
+        $content->file = storage_path('PDF/'.$newName);
+        $content->save();
        
 
 
@@ -84,6 +80,13 @@ class ContentsController extends Controller
         $data = Content::all();
         
         return view('/layouts/Historico', ['contents' => $data]);
+        
+    }
+    public function Teste()
+    {
+        $data = Content::all();
+        
+        return view('/layouts/Teste', ['contents' => $data]);
         
     }
     

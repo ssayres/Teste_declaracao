@@ -31,6 +31,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
 
     Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
     Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
+    //Route::get('/dashboard/teste','App\Http\Controllers\ContentsController@teste' )->name('dashboard.teste');
     Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::post('/dashboard/store','App\Http\Controllers\AssetsController@store' )->name('dashboard.store');
     Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');

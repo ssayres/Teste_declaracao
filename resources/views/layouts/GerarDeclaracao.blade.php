@@ -326,7 +326,8 @@
         });
       </script>
       <script>
-        let contentItems = []
+        
+         contentItems = []
         $('#butao2').click(function(e) {
           e.preventDefault()
           let item = {

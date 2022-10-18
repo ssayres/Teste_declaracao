@@ -58,17 +58,44 @@ class PdfController extends Controller
     }
 
     public function getPDF(){
+        //$filename = '1.pdf';
+        //$file = storage_path(). "/app/public/PDF/". $filename;
+        //$headers = ['Content-Type: application/pdf'];
+        //return response()->file($file,  $headers);
+        //public function getPDF($file)
+      //   
+           // $dompdf = new Dompdf(["enable_remote" => true]);
+            //$dompdf->loadHtml("<h1>Teste PDF<h1>");
+          //  ob_start();
+          //  file_get_contents(storage_path('app/public/PDF/1.pdf'));
+            //$pdf = ob_get_clean();
+         //   $dompdf->loadHtml(ob_get_clean());
+            // Setup do papel
+         //   $dompdf->setPaper('A4', '');   
+            // Renderizar o html como pdf
+         //   $dompdf->render();
+            //Gerar o PDF
+         //   $dompdf->stream('pdf.pdf', ["Attachment" => false]);
+         
+        $dompdf = new Dompdf(["enable_remote" => true]);
+        //$dompdf->loadHtml("<h1>Teste PDF<h1>");
 
-        $filename = '3.pdf';
-        $file = storage_path(). "/app/public/PDF/". $filename;
+        ob_start();
 
-        $name = "Declaração Segunda via.pdf";
-    
-        $headers = ['Content-Type: application/pdf'];
-    
-        return Response::download($file, $name, $headers);
-    
-    
+        require public_path("index_pdf2.blade.php");
+        //$pdf = ob_get_clean();
+        $dompdf->loadHtml(ob_get_clean());
+        // Setup do papel
+        $dompdf->setPaper('A4', '');
+
+        // Renderizar o html como pdf
+        $dompdf->render();
+
+        //Gerar o PDF
+        $dompdf->stream('pdf.pdf', ["Attachment" => false]);
+     
+
+
 
 }
 
