@@ -38,16 +38,18 @@
               <th scope="col">Remetente</th>
               <th scope="col">Destinatário</th>
               <th scope="col">Data da Solicitação</th>
+              <th scope="col"><x-nav-link :href="route('dashboard.getPDF')"  :active="request()->routeIs('dashboard.getPDF')">
+            {{ __('Gerar todos ✉') }}
+                    </x-nav-link></th>
             </tr>
           </thead>
 
           <tbody>
           @foreach($contents as $content )
-         
             <tr scope="row">
               <th scope="row">
                 <label class="control control--checkbox">
-                  <input type="checkbox"/>
+                  <input type="checkbox" value="{{$content['id_declaracao']}}"/>
                   <div class="control__indicator"></div>
                 </label>
               </th>
@@ -58,9 +60,9 @@
               <td>{{$content['destinatario']}}</td>
               <td>{{$content['created_at']}}</td>
              
-            <td> <x-nav-link :href="route('dashboard.getPDF')" id="button-5" :active="request()->routeIs('dashboard.getPDF')">
+            <td> <x-nav-link :href="route('dashboard.pdfview')"  :active="request()->routeIs('dashboard.pdfview')">
             {{ __('Detalhar ✉') }}
-                    </x-nav-link>>
+                    </x-nav-link></th>
                        
 </td> 
 

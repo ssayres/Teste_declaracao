@@ -80,6 +80,8 @@ class ContentsController extends Controller
         $data = Content::all();
         
         return view('/layouts/Historico', ['contents' => $data]);
+
+        
         
     }
     public function Teste()
