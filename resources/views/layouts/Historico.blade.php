@@ -9,7 +9,7 @@
     <link href="{{ URL::asset('css/ajustes.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/bootstrap.mim.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/tabela.css') }}" rel="stylesheet" type="text/css">
-    
+
 
 </head>
 
@@ -31,8 +31,8 @@
                   <div class="control__indicator"></div>
                 </label>
               </th>
-            
-              
+
+
               <th scope="col">ID Declaração</th>
               <th scope="col">ID do Usuário</th>
               <th scope="col">Remetente</th>
@@ -59,17 +59,17 @@
               </td>
               <td>{{$content['destinatario']}}</td>
               <td>{{$content['created_at']}}</td>
-             
-            <td> <x-nav-link :href="route('dashboard.pdfview')"  :active="request()->routeIs('dashboard.pdfview')">
+
+            <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])">
             {{ __('Detalhar ✉') }}
                     </x-nav-link></th>
-                       
-</td> 
+
+</td>
 
               <!-- <td>{{$content['content']}}</td> -->
               <!-- <td>{{$content['quantity']}}</td> -->
               <!-- <td>{{$content['value']}}</td> -->
-             
+
             </tr>
             @endforeach
           </tbody>
