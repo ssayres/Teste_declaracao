@@ -35,19 +35,19 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::post('/dashboard/store','App\Http\Controllers\AssetsController@store' )->name('dashboard.store');
     Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
+    Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
     Route::get('/dashboard/pdfview','App\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
 
-    
+
     //Route::get('/dashboard/Conteudo', 'App\Http\Controllers\DashBoardController@Conteudo')->name('dashboard.Conteudo');
     //Route::post('/dashboard/GerarDeclaracao', 'App\Http\Controllers\Declaracao@EnviarAoBanco')->name('dashboard.EnviarAoBanco');
 
 });
 
-    
-    
 
 
-    
+
+
+
 
 require __DIR__.'/auth.php';
-

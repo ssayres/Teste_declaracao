@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Content;
 use App\Models\Asset;
 use App\Models\ContentItem;
+use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,6 @@ class ContentsController extends Controller
         $content = new Content;
         // Retrieve the currently authenticated user...
         $id = auth()->id();
-
         $content->id_user = $id;
 
         // Retrieve the currently authenticated user...
@@ -40,12 +40,8 @@ class ContentsController extends Controller
         $content->complemento2 = $request->complemento;
         $content->cidade2 = $request->cidade;
         $content->uf2 = $request->uf;
-        $fileCount = count(glob('storage/PDF/*.pdf'));
-        $newName = ($fileCount + 1) . '.pdf';
-        $content->file = storage_path('PDF/'.$newName);
+        $content->file = $this->generatePDF($request);
         $content->save();
-       
-
 
         foreach ($request->content_items as $item) {
             $contentItem = new ContentItem();
@@ -56,21 +52,36 @@ class ContentsController extends Controller
             $contentItem->quantity = intval($item["quantity"]);
             $contentItem->value = $item["value"];
             $contentItem->save();
-
-
-
-
-
-            
         }
 
+        return response()->json([
+            "declaracao" => $content->id_declaracao,
+            "filename" => $content->file
+        ]);
+    }
 
-        echo json_encode($content);
+    public function download($declaracao) {
+        $content = Content::find($declaracao);
+        $headers = ['Content-Type: application/pdf'];
+        return response()->file($content->file,  $headers);
+        
+    }
+    
 
-        //return response()->json(['success' => 'Enviado ao banco com sucesso']);
-        //return redirect('/dashboard/GerarDeclaracao');
+    private function generatePDF()
+    {
+        $dompdf = new Dompdf(["enable_remote" => true]);
+        ob_start();
+        require public_path("index_pdf.blade.php");
+        $dompdf->loadHtml(ob_get_clean());
+        $dompdf->setPaper('A4', '');
+        $dompdf->render();
+        $output = $dompdf->output();
+        $filename = storage_path("app/public/pdfs/". md5(time()) .".pdf");
+        file_put_contents($filename, $output);
+        ob_end_flush();
 
-
+        return $filename;
     }
 
 
@@ -78,18 +89,18 @@ class ContentsController extends Controller
     {
 
         $data = Content::all();
-        
+
         return view('/layouts/Historico', ['contents' => $data]);
 
-        
-        
+
+
     }
     public function Teste()
     {
         $data = Content::all();
-        
+
         return view('/layouts/Teste', ['contents' => $data]);
-        
+
     }
-    
+
 }

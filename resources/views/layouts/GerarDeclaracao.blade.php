@@ -259,7 +259,7 @@
 
                       <div class="col-7">
                         <div class="d-grid my-3">
-                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar().funcao_pdf()">Gerar Declaração</button>
+                          <button class="btn btn-danger" type="submit" name="botaoEnviar" id="botaoEnviar" onclick="Enviar()">Gerar Declaração</button>
                         </div>
                       </div>
                     </div>
@@ -326,7 +326,6 @@
         });
       </script>
       <script>
-        
          contentItems = []
         $('#butao2').click(function(e) {
           e.preventDefault()
@@ -353,7 +352,6 @@
             form.append(inputQuantity)
             form.append(inputValue)
             show2 += `
-            
             <div class="row g-2 my-0 tabela">
                 <tr >
                     <td scope="col">${e['id_product']}</td>
@@ -362,7 +360,6 @@
                     <td scope="col">${e['quantity']}</td>
                     <td scope="col">${e['value']}</td>
                     <td scope="col" nowrap><button class="apagar" onclick="removerElemento(event.target)">🗑️<button><td>
-                    
                 </tr>
                </div>
               `
@@ -379,8 +376,9 @@
               url: "{{route('dashboard.Conteudo')}}",
               type: "POST",
               data: $(this).serialize(),
-              success: function() {
+              success: function(data) {
                 console.log("Dados inseridos com sucesso!");
+                funcao_pdf(data.declaracao)
               },
               error: function(e) {
                 console.log(e);
@@ -388,34 +386,29 @@
             });
           })
         })
-        $(function funcao_pdf() {
-          $('form[name="formGeral"]').submit(function(e) {
-            e.preventDefault();
+        function funcao_pdf(declaracao) {
             $.ajax({
-              url: "{{route('dashboard.index_pdf')}}",
-              type: "POST",
-              data: $(this).serialize(),
+              url: "/dashboard/download/" + declaracao,
+              type: "GET",
               xhrFields: {
                 responseType: 'blob'
               },
               success: function(response) {
                 var blob = new Blob([response]);
                 var link = document.createElement('a');
+                var ww =  document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
+                //ww.href = window.URL.createObjectURL(blob);
                 link.download = "Declaracao.pdf";
                 link.click();
-                
-                // window.open(link, '_blank');
-
+                //window.open(ww.href,"Declaracao.pdf", "",);
+                //ww.click();
               }
             });
-          })
-        })
-       
+        }
         function removerElemento(elementoClicado) {
           elementoClicado.closest("tr").remove();
         }
-
         function formatKeyUP(){
           axios.get("http://localhost:8000/api/dashboard/products/"+this.IdProduct)
         .then((response) => {
@@ -426,11 +419,9 @@
          } else {
           this.value = "Id não encontrado";
            this.content = "Id não encontrado";
-
          }
         });
       }
-      
         /*
         function funcao_pdf() {
           var style = "<style>";

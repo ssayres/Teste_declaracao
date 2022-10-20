@@ -9,7 +9,7 @@
     <link href="{{ URL::asset('css/ajustes.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/bootstrap.mim.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/tabela.css') }}" rel="stylesheet" type="text/css">
-    
+
 
 </head>
 
@@ -31,8 +31,8 @@
                   <div class="control__indicator"></div>
                 </label>
               </th>
-            
-              
+
+
               <th scope="col">ID Declaração</th>
               <th scope="col">ID do Usuário</th>
               <th scope="col">Remetente</th>
@@ -49,7 +49,7 @@
             <tr scope="row">
               <th scope="row">
                 <label class="control control--checkbox">
-                  <input type="checkbox" value="{{$content['id_declaracao']}}"/>
+                  <input type="checkbox" value="{{$content['id_declaracao']}}" name="checkbox" id="botaoCheck"/>
                   <div class="control__indicator"></div>
                 </label>
               </th>
@@ -59,17 +59,17 @@
               </td>
               <td>{{$content['destinatario']}}</td>
               <td>{{$content['created_at']}}</td>
-             
-            <td> <x-nav-link :href="route('dashboard.pdfview')"  :active="request()->routeIs('dashboard.pdfview')">
+
+            <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])">
             {{ __('Detalhar ✉') }}
                     </x-nav-link></th>
-                       
-</td> 
+
+</td>
 
               <!-- <td>{{$content['content']}}</td> -->
               <!-- <td>{{$content['quantity']}}</td> -->
               <!-- <td>{{$content['value']}}</td> -->
-             
+
             </tr>
             @endforeach
           </tbody>
@@ -96,6 +96,18 @@ function toggle(source) {
           checkboxes[i].checked = source.checked;
   }
 }
+
+
+
+// var getCheckedBoxes = function (){
+  // var result = $('input[value="{{$content["id_declaracao"]}}:checked');
+  // if(result.length > 0){
+  //  var resultString = result.length + "checkboxe(s) checked<br>";
+    // result.each(function (declaracao, value) {
+      // resultString += $(this).val() + "<br/>"
+    // })
+  // }
+// }
 </script>
 
 <!-- [Script para chamar a NavBar] -->
@@ -120,7 +132,6 @@ $("input").on("input.highlight", function() {
   $("#context").unmark().mark(search);
 }).trigger("input.highlight").focus();
 });
-
 $(function funcao_pegar() {
           $('form[name="formGeral"]').submit(function(e) {
               e.preventDefault();
@@ -141,7 +152,6 @@ $(function funcao_pegar() {
               });
           })
         })
-
 </script>
 </x-app-layout>
 </body>
