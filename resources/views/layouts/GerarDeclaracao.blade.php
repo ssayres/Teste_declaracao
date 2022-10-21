@@ -398,7 +398,7 @@
                 var link = document.createElement('a');
                 var ww =  document.createElement('a');
                 link.href = window.URL.createObjectURL(blob);
-                //ww.href = window.URL.createObjectURL(blob);
+                ww.href = window.URL.createObjectURL(blob);
                 link.download = "Declaracao.pdf";
                 link.click();
                 //window.open(ww.href,"Declaracao.pdf", "",);
@@ -410,15 +410,15 @@
           elementoClicado.closest("tr").remove();
         }
         function formatKeyUP(){
-          axios.get("http://localhost:8000/api/dashboard/products/"+this.IdProduct)
+          axios.get("http://localhost:8000/api/dashboard/products/"+elementoClicado)
         .then((response) => {
          if(response.data.length === 1){
-           this.value = response.data[0].valor+",00";
-           this.content = response.data[0].conteudo;
+          elementoClicado.value = response.data[0].valor+",00";
+          elementoClicado.content = response.data[0].conteudo;
            //console.log(response.data[0].valor);
          } else {
-          this.value = "Id não encontrado";
-           this.content = "Id não encontrado";
+          elementoClicado.value = "Id não encontrado";
+          elementoClicado.content = "Id não encontrado";
          }
         });
       }

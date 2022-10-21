@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Jenssegers\Date\DateServiceProvider::class,	
+        Webklex\PDFMerger\Providers\PDFMergerServiceProvider::class,
         
 
         /*
@@ -235,6 +236,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Date' => Jenssegers\Date\Date::class,
         'PDF' => Barryvdh\DomPDF\Facade::class,
+        'PDFMerger' => Webklex\PDFMerger\Facades\PDFMergerFacade::class
+
 
     ],
 

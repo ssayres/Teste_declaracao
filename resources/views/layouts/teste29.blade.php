@@ -41,6 +41,9 @@
               <th scope="col"><x-nav-link :href="route('dashboard.getPDF')"  :active="request()->routeIs('dashboard.getPDF')">
             {{ __('Gerar todos ✉') }}
                     </x-nav-link></th>
+                    <!-- <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])" onclick="teste(this)">
+            {{ __('Detalhar ✉') }}
+                    </x-nav-link> -->
             </tr>
           </thead>
 
@@ -49,7 +52,7 @@
             <tr scope="row">
               <th scope="row">
                 <label class="control control--checkbox">
-                  <input type="checkbox" value="{{$content['id_declaracao']}}" name="checkbox"  />
+                  <input type="checkbox" value="{{$content['id_declaracao']}}" name="checkbox" />
                   <div class="control__indicator"></div>
                 </label>
               </th>
@@ -62,11 +65,11 @@
 
             <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])">
             {{ __('Detalhar ✉') }}
-                    </x-nav-link></th>
-
-                    <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])" onclick="teste(this)">
-            {{ __('Detalhara ✉') }}
                     </x-nav-link>
+                   
+                  </th>
+
+                  
 
 </td>
 
@@ -104,9 +107,10 @@ function toggle(source) {
 
 function teste(source) {
 countChecked = function() {
+  var n = $( "input:checked" ).length;
   // $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
-  $("div").each(function(){
-    if( $( "input:checked" )) {
+  $("div").each(function(declaracao){
+    if( this.n === true) {
       function funcao_pdf(declaracao) {
             $.ajax({
               url: "/dashboard/download/" + declaracao,
@@ -135,7 +139,6 @@ countChecked();
 $( "input[type=checkbox]" ).on( "click", countChecked );
 
 }
-
     
 
 
