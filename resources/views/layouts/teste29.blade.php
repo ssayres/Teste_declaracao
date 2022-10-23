@@ -38,7 +38,12 @@
               <th scope="col">Remetente</th>
               <th scope="col">Destinatário</th>
               <th scope="col">Data da Solicitação</th>
-                <th scope="col" id="gerar-todos"><a href="#">{{ __('Gerar PDFs ✉') }}</a></th>
+              <th scope="col"><x-nav-link :href="route('dashboard.getPDF')"  :active="request()->routeIs('dashboard.getPDF')">
+            {{ __('Gerar todos ✉') }}
+                    </x-nav-link></th>
+                    <!-- <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])" onclick="teste(this)">
+            {{ __('Detalhar ✉') }}
+                    </x-nav-link> -->
             </tr>
           </thead>
 
@@ -47,7 +52,7 @@
             <tr scope="row">
               <th scope="row">
                 <label class="control control--checkbox">
-                  <input type="checkbox" value="{{$content['id_declaracao']}}" name="checkbox"  />
+                  <input type="checkbox" value="{{$content['id_declaracao']}}" name="checkbox" />
                   <div class="control__indicator"></div>
                 </label>
               </th>
@@ -60,11 +65,11 @@
 
             <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])">
             {{ __('Detalhar ✉') }}
-                    </x-nav-link></th>
-
-                    <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])" onclick="teste(this)">
-            {{ __('Detalhara ✉') }}
                     </x-nav-link>
+                   
+                  </th>
+
+                  
 
 </td>
 
@@ -91,7 +96,6 @@
 
 <!-- [Script para selecionar todos] -->
 <script>
-
 function toggle(source) {
   var checkboxes = document.querySelectorAll('input[type="checkbox"]');
   for (var i = 0; i < checkboxes.length; i++) {
@@ -100,6 +104,45 @@ function toggle(source) {
   }
 
 }
+
+function teste(source) {
+countChecked = function() {
+  var n = $( "input:checked" ).length;
+  // $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
+  $("div").each(function(declaracao){
+    if( this.n === true) {
+      function funcao_pdf(declaracao) {
+            $.ajax({
+              url: "/dashboard/download/" + declaracao,
+              type: "GET",
+              xhrFields: {
+                responseType: 'blob'
+              },
+              success: function(response) {
+                var blob = new Blob([response]);
+                var link = document.createElement('a');
+                var ww =  document.createElement('a');
+                link.href = window.URL.createObjectURL(blob);
+                ww.href = window.URL.createObjectURL(blob);
+                link.download = "Declaracao.pdf";
+                link.click();
+                //window.open(ww.href,"Declaracao.pdf", "",);
+                //ww.click();
+              }
+            });
+        }
+    }
+  })
+}
+countChecked();
+ 
+$( "input[type=checkbox]" ).on( "click", countChecked );
+
+}
+    
+
+
+
 </script>
 
 <!-- [Script para chamar a NavBar] -->
@@ -109,23 +152,20 @@ function toggle(source) {
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="js/popper.min.js"></script>
 
-<script src="{{asset('js/scripts.js')}}"></script>
+<script src="js/bootstrap.min.js"></script>
+
+<script src="js/main.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <script>
 $(function() {
-    $("#gerar-todos").on("click", function (e) {
-        e.preventDefault()
-        $("input:checkbox[name=checkbox]:checked").each(function() {
-            funcao_pdf($(this).val())
-        })
-    })
-
-    $("input").on("input.highlight", function() {
-      var search = $(this).val();
-      $("#context").unmark().mark(search);
-    }).trigger("input.highlight").focus();
+$("input").on("input.highlight", function() {
+  var search = $(this).val();
+  $("#context").unmark().mark(search);
+}).trigger("input.highlight").focus();
 });
 
 </script>
