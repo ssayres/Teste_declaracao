@@ -337,36 +337,45 @@
             'value': $('#value').val(),
           }
           contentItems.push(item)
-          var show2 = "";
-          let cont = 0;
-          contentItems.forEach(function(e) {
-            let form = $('form[name="formGeral"]');
-            let inputProduct = $("<input>").attr("name", "content_items\[" + cont + "\]\[id_product\]").attr("type", "hidden").val(e['id_product'])
-            let inputCostCenter = $("<input>").attr("name", "content_items\[" + cont + "\]\[cost_center\]").attr("type", "hidden").val(e['cost_center'])
-            let inputContent = $("<input>").attr("name", "content_items\[" + cont + "\]\[content\]").attr("type", "hidden").val(e['content'])
-            let inputQuantity = $("<input>").attr("name", "content_items\[" + cont + "\]\[quantity\]").attr("type", "hidden").val(e['quantity'])
-            let inputValue = $("<input>").attr("name", "content_items\[" + cont + "\]\[value\]").attr("type", "hidden").val(e['value'])
-            form.append(inputProduct)
-            form.append(inputCostCenter)
-            form.append(inputContent)
-            form.append(inputQuantity)
-            form.append(inputValue)
-            show2 += `
+          resetForm(contentItems)
+        });
+         function resetForm(items) {
+             $(".row-input").remove()
+             let show2 = "";
+             let cont = 0;
+             items.forEach(function(e) {
+                 let form = $('form[name="formGeral"]');
+                 let inputProduct = $("<input>").attr("name", "content_items\[" + cont + "\]\[id_product\]").attr("type", "hidden").attr("class", "row-input").val(e['id_product'])
+                 let inputCostCenter = $("<input>").attr("name", "content_items\[" + cont + "\]\[cost_center\]").attr("type", "hidden").attr("class", "row-input").val(e['cost_center'])
+                 let inputContent = $("<input>").attr("name", "content_items\[" + cont + "\]\[content\]").attr("type", "hidden").attr("class", "row-input").val(e['content'])
+                 let inputQuantity = $("<input>").attr("name", "content_items\[" + cont + "\]\[quantity\]").attr("type", "hidden").attr("class", "row-input").val(e['quantity'])
+                 let inputValue = $("<input>").attr("name", "content_items\[" + cont + "\]\[value\]").attr("type", "hidden").attr("class", "row-input").val(e['value'])
+                 form.append(inputProduct)
+                 form.append(inputCostCenter)
+                 form.append(inputContent)
+                 form.append(inputQuantity)
+                 form.append(inputValue)
+                 show2 += `
             <div class="row g-2 my-0 tabela">
-                <tr >
+                <tr class="row-product-${cont}">
                     <td scope="col">${e['id_product']}</td>
                     <td scope="col">${e['cost_center']}</td>
                     <td scope="col">${e['content']}</td>
                     <td scope="col">${e['quantity']}</td>
                     <td scope="col">${e['value']}</td>
-                    <td scope="col" nowrap><button class="apagar" onclick="removerElemento(event.target)">🗑️<button><td>
+                    <td scope="col" nowrap><button class="apagar" onclick="removerElemento(${cont})">🗑️<button><td>
                 </tr>
                </div>
               `
-            cont++;
-          })
-          $('#show').html(show2);
-        });
+                 cont++;
+             })
+             $('#show').html(show2);
+         }
+         function removerElemento(elementoClicado) {
+             $(".row-product-"+elementoClicado+"").remove()
+             contentItems.splice(elementoClicado,1)
+             resetForm(contentItems)
+         }
       </script>
       <script>
         $(function Enviar() {
@@ -386,29 +395,6 @@
             });
           })
         })
-        function funcao_pdf(declaracao) {
-            $.ajax({
-              url: "/dashboard/download/" + declaracao,
-              type: "GET",
-              xhrFields: {
-                responseType: 'blob'
-              },
-              success: function(response) {
-                var blob = new Blob([response]);
-                var link = document.createElement('a');
-                var ww =  document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                ww.href = window.URL.createObjectURL(blob);
-                link.download = "Declaracao.pdf";
-                link.click();
-                //window.open(ww.href,"Declaracao.pdf", "",);
-                //ww.click();
-              }
-            });
-        }
-        function removerElemento(elementoClicado) {
-          elementoClicado.closest("tr").remove();
-        }
         function formatKeyUP(){
           axios.get("http://localhost:8000/api/dashboard/products/"+elementoClicado)
         .then((response) => {

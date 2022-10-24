@@ -68,12 +68,7 @@ class ContentsController extends Controller
         return response()->file($content->file,  $headers);
         
     }
-    public function Checkdownload($declaracao) {
-        $content = Content::find($declaracao);
-        $headers = ['Content-Type: application/pdf'];
-        return response()->file($content->file,  $headers);
-        
-    }
+    
     
 
     private function generatePDF()

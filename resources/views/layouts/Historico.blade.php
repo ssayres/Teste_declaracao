@@ -38,9 +38,7 @@
               <th scope="col">Remetente</th>
               <th scope="col">Destinatário</th>
               <th scope="col">Data da Solicitação</th>
-              <th scope="col"><x-nav-link :href="route('dashboard.getPDF')"  :active="request()->routeIs('dashboard.getPDF')">
-            {{ __('Gerar todos ✉') }}
-                    </x-nav-link></th>
+                <th scope="col" id="gerar-todos"><a href="#">{{ __('Gerar PDFs ✉') }}</a></th>
             </tr>
           </thead>
 
@@ -64,9 +62,6 @@
             {{ __('Detalhar ✉') }}
                     </x-nav-link></th>
 
-                    <td> <x-nav-link :href="route('dashboard.download', $content['id_declaracao'])"  :active="request()->routeIs('dashboard.download', $content['id_declaracao'])" onclick="teste(this)">
-            {{ __('Detalhara ✉') }}
-                    </x-nav-link>
 
 </td>
 
@@ -91,6 +86,8 @@
 
 <script type="text/javascript" src="js/mdbootstrap.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
+
 <!-- [Script para selecionar todos] -->
 <script>
 function toggle(source) {
@@ -99,47 +96,7 @@ function toggle(source) {
       if (checkboxes[i] != source)
           checkboxes[i].checked = source.checked;
   }
-
 }
-
-function teste(source) {
-countChecked = function() {
-  // $( "div" ).text( n + (n === 1 ? " is" : " are") + " checked!" );
-  $("div").each(function(){
-    if( $( "input:checked" )) {
-      function funcao_pdf(declaracao) {
-            $.ajax({
-              url: "/dashboard/download/" + declaracao,
-              type: "GET",
-              xhrFields: {
-                responseType: 'blob'
-              },
-              success: function(response) {
-                var blob = new Blob([response]);
-                var link = document.createElement('a');
-                var ww =  document.createElement('a');
-                link.href = window.URL.createObjectURL(blob);
-                ww.href = window.URL.createObjectURL(blob);
-                link.download = "Declaracao.pdf";
-                link.click();
-                //window.open(ww.href,"Declaracao.pdf", "",);
-                //ww.click();
-              }
-            });
-        }
-    }
-  })
-}
-countChecked();
- 
-$( "input[type=checkbox]" ).on( "click", countChecked );
-
-}
-
-    
-
-
-
 </script>
 
 <!-- [Script para chamar a NavBar] -->
@@ -149,22 +106,23 @@ $( "input[type=checkbox]" ).on( "click", countChecked );
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 
-<script src="js/popper.min.js"></script>
-
-<script src="js/bootstrap.min.js"></script>
-
-<script src="js/main.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+<script src="{{asset('js/scripts.js')}}"></script>
 
 <script>
 $(function() {
-$("input").on("input.highlight", function() {
-  var search = $(this).val();
-  $("#context").unmark().mark(search);
-}).trigger("input.highlight").focus();
+    $("#gerar-todos").on("click", function (e) {
+        e.preventDefault()
+        $("input:checkbox[name=checkbox]:checked").each(function() {
+            funcao_pdf($(this).val())
+        })
+    })
+    $("input").on("input.highlight", function() {
+      var search = $(this).val();
+      $("#context").unmark().mark(search);
+    }).trigger("input.highlight").focus();
 });
-
 </script>
 </x-app-layout>
 </body>

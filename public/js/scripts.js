@@ -3,7 +3,7 @@ class FormMask {
     constructor(element, mask, replacementChar, charsToIgnore) {
 
         element.FormMask = this
-        
+
         this.input = element
         this.mask = mask
         this.char = replacementChar
@@ -30,22 +30,22 @@ class FormMask {
             if(this.input.value == this.mask) this.input.value = ""
 
         })
-    
+
         this.input.addEventListener("keydown", e => {
-    
+
             if(e.key == "Backspace" || e.key == "Delete") {
-                
+
                 this.deleteValue( this.input.value.split("") )
                 e.preventDefault()
 
             }
 
         })
-    
+
         this.input.addEventListener("beforeinput", e => {
 
             e.preventDefault()
-    
+
             const key = e.key || e.data
             const numberKey = (!isNaN(key) && key != " ") //(" " == 0) to javascript
 
@@ -56,11 +56,11 @@ class FormMask {
             this.maskPattern(inputChars, key)
 
         })
-    
+
         this.input.addEventListener("paste", e => {
-    
+
             const data = e.clipboardData.getData("text")
-    
+
             this.onPasteData(data)
 
             e.preventDefault()
@@ -96,19 +96,19 @@ class FormMask {
     maskPattern(inputChars, key) {
 
         let cursor = this.input.selectionStart
-        
+
         for(let i=cursor; i<inputChars.length; i++) { //grant to skip all special chars on insert
 
             let ignore = this.specialChars.indexOf(inputChars[i]) >= 0 //if special char, ignore (increment cursor)
 
             if(!ignore) break
-            
+
             cursor++ //jump to next char != ignored
 
         }
-        
+
         inputChars.splice(cursor, 1, key)
-        
+
         this.insertValue(inputChars.join(""), cursor+1)
 
     }
@@ -136,7 +136,7 @@ class FormMask {
             let ignore = this.specialChars.indexOf(inputChars[cursor-1]) >= 0
 
             if(!ignore) break
-            
+
             cursor -= 1
 
         }
@@ -157,7 +157,7 @@ class FormMask {
         for(let i=start; i<end; i++) {
 
             let nonSpecialChar = this.specialChars.indexOf(inputChars[i]) < 0
-            
+
             if(nonSpecialChar) inputChars.splice(i, 1, this.char)
 
         }
@@ -169,7 +169,7 @@ class FormMask {
     }
 
     onPasteData(data) {
-        
+
         const maskChars = this.mask.split("")
         const dataChars = data.split("")
 
@@ -199,14 +199,12 @@ class FormMask {
     let complemento = document.querySelector('#complemento');
     let cidade = document.querySelector('#cidade');
     let estado = document.querySelector('#estado');
-
     cep.addEventListener('blur', function(e){
         let cep = e.target.value;
         let script = document.createElement('script');
         script.src = 'https://viacep.com.br/ws/'+cep+'/son/?callback=popularForm';
-        document.body.appendChild(script);   
+        document.body.appendChild(script);
     });
-
     function popularForm(resposta){
         if("erro" in resposta){
             alert("CEP não encontrado");
@@ -217,20 +215,33 @@ class FormMask {
         cidade.value = resposta.localidade;
         estado.value = resposta.uf;
     }
-
     }
-
 */
    }
-   
 
+function funcao_pdf(declaracao) {
+    $.ajax({
+        url: "/dashboard/download/" + declaracao,
+        type: "GET",
+        xhrFields: {
+            responseType: 'blob'
+        },
+        success: function(response) {
+            const blob = new Blob([response], { type: 'application/pdf;base64' });
+            const ww =  document.createElement('a');
+            ww.href = window.URL.createObjectURL(blob);
+            window.open(ww);
+        }
+    });
 
+    //     success: function(response) {
+//         const blob = new Blob([response]);
+//         const link = document.createElement('a');
+//         const ww =  document.createElement('a');
+//         link.href = window.URL.createObjectURL(blob);
+//         ww.href = window.URL.createObjectURL(blob);
+//         link.download = "Declaracao.pdf";
+//         link.click();
+// 
 
-
-
-
-
-
-
-
-
+}
