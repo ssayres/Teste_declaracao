@@ -26,6 +26,8 @@ class CreateContentsTable extends Migration
             $table->string('complemento');
             $table->string('cidade');
             $table->string('uf');
+            $table->string('contato');
+            $table->string('telefone');
             $table->string('destinatario');
             $table->string('cnpj2');
             $table->string('cep2');
@@ -33,6 +35,8 @@ class CreateContentsTable extends Migration
             $table->string('numero2');
             $table->string('complemento2');
             $table->string('cidade2');
+            $table->string('contato2');
+            $table->string('telefone2');
             $table->string('uf2');
             $table->string('file');
 //            $table->integer('idProduct');

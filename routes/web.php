@@ -24,19 +24,19 @@ Route::get('/', function () {
 //rota para os dois usuários
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
+    Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
+    Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
     });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
-    Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
-
-    Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
+   
     Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
     //Route::get('/dashboard/teste','App\Http\Controllers\ContentsController@teste' )->name('dashboard.teste');
     Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::post('/dashboard/store','App\Http\Controllers\AssetsController@store' )->name('dashboard.store');
     Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
-    Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
-    //Route::get('/dashboard/Checkdownload/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.Checkdownload');
+    
     Route::get('/dashboard/pdfview','App\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
 
 

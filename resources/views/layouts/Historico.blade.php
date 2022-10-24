@@ -9,6 +9,7 @@
     <link href="{{ URL::asset('css/ajustes.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/bootstrap.mim.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/tabela.css') }}" rel="stylesheet" type="text/css">
+    <script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
 
 
 </head>
@@ -62,6 +63,7 @@
             {{ __('Detalhar ✉') }}
                     </x-nav-link></th>
 
+          
 
 </td>
 
@@ -85,8 +87,6 @@
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.js"></script>
 
 <script type="text/javascript" src="js/mdbootstrap.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/js-base64@3.7.2/base64.min.js"></script>
 
 <!-- [Script para selecionar todos] -->
 <script>

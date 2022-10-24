@@ -33,6 +33,8 @@ class ContentsController extends Controller
         $content->complemento = $request->complemento;
         $content->cidade = $request->cidade;
         $content->uf = $request->uf;
+        $content->contato = $request->contato;
+        $content->telefone = $request->telefone;
         $content->destinatario = $request->destinatario;
         $content->cnpj2 = $request->cnpj;
         $content->cep2 = $request->cep;
@@ -41,6 +43,8 @@ class ContentsController extends Controller
         $content->complemento2 = $request->complemento;
         $content->cidade2 = $request->cidade;
         $content->uf2 = $request->uf;
+        $content->contato2 = $request->contato;
+        $content->telefone2 = $request->telefone;
         $content->file = $this->generatePDF($request);
         $content->save();
 
@@ -68,7 +72,12 @@ class ContentsController extends Controller
         return response()->file($content->file,  $headers);
         
     }
-    
+    public function Checkdownload($declaracao) {
+        $content = Content::find($declaracao);
+        $headers = ['Content-Type: application/pdf'];
+        return response()->file($content->file,  $headers);
+        
+    }
     
 
     private function generatePDF()
@@ -106,3 +115,4 @@ class ContentsController extends Controller
     }
 
 }
+

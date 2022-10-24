@@ -233,15 +233,8 @@ function funcao_pdf(declaracao) {
             window.open(ww);
         }
     });
-
-    //     success: function(response) {
-//         const blob = new Blob([response]);
-//         const link = document.createElement('a');
-//         const ww =  document.createElement('a');
-//         link.href = window.URL.createObjectURL(blob);
-//         ww.href = window.URL.createObjectURL(blob);
-//         link.download = "Declaracao.pdf";
-//         link.click();
-// 
-
 }
+
+
+
+

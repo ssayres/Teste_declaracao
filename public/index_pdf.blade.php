@@ -3,6 +3,8 @@ namespace App\Http\Controllers;
 use Dompdf\Dompdf;
 use Illuminate\Http\Request;
 use App\Models\Content;
+use App\Models\ContentItem;
+
 ?>
 
 <!DOCTYPE html>
@@ -21,6 +23,7 @@ use App\Models\Content;
     <?php
     use Jenssegers\Date\Date;
     Date::setLocale('pt');
+    $content = new ContentItem();
     $date = Date::now()->format(' d F Y ');
     $content = \App\Models\Content::all();
     ?>
@@ -88,19 +91,24 @@ use App\Models\Content;
                     <caption>Remetente</caption>
                     <thead>
                         <tr>
+                            <th>ID Declaração</th>
                             <th>Nome</th>
                             <th>CPF/CNPJ</th>
                             <th>Endereço</th>
                             <th>Cidade/UF</th>
+                            <th>Contato/Celular</th>
                         </tr>
                     </thead>
                     <tbody>{
                         <tr>
-
+                        @php
+                        <td> {!! $contentItem->id_content = $content->id_declaracao !!}</td>
+                        @endphp
                             <td><?php echo $_REQUEST['remetente'] ?></td>
                             <td><?php echo $_REQUEST['cnpj'] ?></td>
                             <td><?php echo $_REQUEST['endereco'] ?><br>nº<?php echo $_REQUEST['numero']?><br><?php echo $_REQUEST['complemento']?></td>
                             <td><?php echo $_REQUEST['cidade'] ?> / <?php echo $_REQUEST['uf'] ?> </td>
+                            <td><?php echo $_REQUEST['contato'] ?>  <?php echo $_REQUEST['telefone'] ?> </td>
                         </tr>
                     </tbody>
 
@@ -115,6 +123,7 @@ use App\Models\Content;
                             <th>CPF/CNPJ</th>
                             <th>Endereço</th>
                             <th>Cidade/UF</th>
+                            <th>Contato/Celular</th>
                         </tr>
                         </thead>
                         <tbody>{
@@ -124,6 +133,7 @@ use App\Models\Content;
                             <td><?php echo $_REQUEST['cnpj2'] ?></td>
                             <td><?php echo $_REQUEST['endereco2'] ?><br>nº<?php echo $_REQUEST['numero2']?><br><?php echo $_REQUEST['complemento2']?></td>
                             <td><?php echo $_REQUEST['cidade2'] ?> / <?php echo $_REQUEST['uf2'] ?> </td>
+                            <td><?php echo $_REQUEST['contato2'] ?>  <?php echo $_REQUEST['telefone2'] ?> </td>
                         </tr>
                     </tbody>
                 </table>

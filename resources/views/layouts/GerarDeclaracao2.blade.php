@@ -92,16 +92,6 @@
                           <input list="" type="text" placeholder="SP" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="uf" id="uf" required>
                         </div>
 
-                        <div class="col-6">
-                                <label for="inputContato" class="form-label">Contato:</label>
-                                <input type="text" placeholder="Digite o nome completo" class="form-control text-primary bg-light" Montserrat-labelledby billing name="contato" id="contato" required>
-                              </div>
-
-                              <div class="col-6">
-                                <label for="inputTelefone" class="form-label">Telefone/Celular:</label>
-                                <input type="tel" placeholder="(xx) x-xxxx-xxxx" class="form-control text-primary bg-light" Montserrat-labelledby billing name="telefone" id="telefone" maxlength="15" required>
-                              </div>
-
                         <div class="form-check form-switch g-0 my-4 salvar">
                           <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
                           <label class="form-check-label" for="flexSwitchCheckDefault">Salvar formulário remetente?</label>
@@ -159,26 +149,16 @@
                                 <label for="inputEstado" class="form-label">Estado:</label>
                                 <input list="nomes" type="text" placeholder="SP" class="form-control is-invalid text-primary" Montserrat-labelledby billing name="uf2" id="uf2" required>
                               </div>
-                              <div class="col-6">
-                                <label for="inputContato" class="form-label">Contato:</label>
-                                <input type="text" placeholder="Digite o nome completo" class="form-control text-primary bg-light" Montserrat-labelledby billing name="contato2" id="contato2" required>
-                              </div>
 
-                              <div class="col-6">
-                                <label for="inputTelefone" class="form-label">Telefone/Celular:</label>
-                                <input type="tel" placeholder="(xx) x-xxxx-xxxx" class="form-control text-primary bg-light" Montserrat-labelledby billing name="telefone2" id="telefone2" maxlength="15" required>
+                              <div class="form-check form-switch g-0 my-4 salvar">
+                                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                <label class="form-check-label" for="flexSwitchCheckDefault">Salvar formulário remetente?</label>
                               </div>
                             </div>
 
-                            <div class="form-check form-switch g-0 my-4 salvar">
-                              <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                              <label class="form-check-label" for="flexSwitchCheckDefault">Salvar formulário remetente?</label>
-                            </div>
                           </div>
-
                         </div>
                       </div>
-                    </div>
 
             </main>
 
@@ -285,98 +265,97 @@
                     </div>
       </form>
       </main>
-    </form>
-    <script>
-      new FormMask(document.querySelector("#cnpj"), "__.___.___/____-__", "_", [".", "-", "/"])
-      new FormMask(document.querySelector("#cnpj2"), "__.___.___/____-__", "_", [".", "-", "/"])
-      new FormMask(document.querySelector("#cep"), "_____-___", "_", ["-"])
-      new FormMask(document.querySelector("#cep2"), "_____-___", "_", ["-"])
-      new FormMask(document.querySelector("#value"), "00.000,00", "0", [".", ","])
-    </script>
-    <script>
-      $("#cep").blur(function() {
-        // Remove tudo o que não é número para fazer a pesquisa
-        var cep = this.value.replace(/[^0-9]/, "");
-        // Validação do CEP; caso o CEP não possua 8 números, então cancela
-        // a consulta
-        if (cep.length != 8) {
-          return false;
-        }
-        // A url de pesquisa consiste no endereço do webservice + o cep que
-        // o usuário informou + o tipo de retorno desejado (entre "json",
-        // "jsonp", "xml", "piped" ou "querty")
-        var url = "https://viacep.com.br/ws/" + cep + "/json/";
-        // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
-        // caso ocorra algum erro (o cep pode não existir, por exemplo) a
-        // usabilidade não seja afetada, assim o usuário pode continuar//
-        // preenchendo os campos normalmente
-        $.getJSON(url, function(dadosRetorno) {
-          try {
-            // Preenche os campos de acordo com o retorno da pesquisa
-            $("#endereco").val(dadosRetorno.logradouro);
-            $("#cidade").val(dadosRetorno.localidade);
-            $("#uf").val(dadosRetorno.uf);
-          } catch (ex) {}
+      </form>
+      <script>
+        new FormMask(document.querySelector("#cnpj"), "__.___.___/____-__", "_", [".", "-", "/"])
+        new FormMask(document.querySelector("#cnpj2"), "__.___.___/____-__", "_", [".", "-", "/"])
+        new FormMask(document.querySelector("#cep"), "_____-___", "_", ["-"])
+        new FormMask(document.querySelector("#cep2"), "_____-___", "_", ["-"])
+        new FormMask(document.querySelector("#value"), "00.000,00", "0", [".", ","])
+      </script>
+      <script>
+        $("#cep").blur(function() {
+          // Remove tudo o que não é número para fazer a pesquisa
+          var cep = this.value.replace(/[^0-9]/, "");
+          // Validação do CEP; caso o CEP não possua 8 números, então cancela
+          // a consulta
+          if (cep.length != 8) {
+            return false;
+          }
+          // A url de pesquisa consiste no endereço do webservice + o cep que
+          // o usuário informou + o tipo de retorno desejado (entre "json",
+          // "jsonp", "xml", "piped" ou "querty")
+          var url = "https://viacep.com.br/ws/" + cep + "/json/";
+          // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
+          // caso ocorra algum erro (o cep pode não existir, por exemplo) a
+          // usabilidade não seja afetada, assim o usuário pode continuar//
+          // preenchendo os campos normalmente
+          $.getJSON(url, function(dadosRetorno) {
+            try {
+              // Preenche os campos de acordo com o retorno da pesquisa
+              $("#endereco").val(dadosRetorno.logradouro);
+              $("#cidade").val(dadosRetorno.localidade);
+              $("#uf").val(dadosRetorno.uf);
+            } catch (ex) {}
+          });
         });
-      });
-      $("#cep2").blur(function() {
-        // Remove tudo o que não é número para fazer a pesquisa
-        var cep2 = this.value.replace(/[^0-9]/, "");
-        // Validação do CEP; caso o CEP não possua 8 números, então cancela
-        // a consulta
-        if (cep2.length != 8) {
-          return false;
-        }
-        // A url de pesquisa consiste no endereço do webservice + o cep que
-        // o usuário informou + o tipo de retorno desejado (entre "json",
-        // "jsonp", "xml", "piped" ou "querty")
-        var url = "https://viacep.com.br/ws/" + cep2 + "/json/";
-        // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
-        // caso ocorra algum erro (o cep pode não existir, por exemplo) a
-        // usabilidade não seja afetada, assim o usuário pode continuar//
-        // preenchendo os campos normalmente
-        $.getJSON(url, function(dadosRetorno) {
-          try {
-            // Preenche os campos de acordo com o retorno da pesquisa
-            $("#endereco2").val(dadosRetorno.logradouro);
-            $("#cidade2").val(dadosRetorno.localidade);
-            $("#uf2").val(dadosRetorno.uf);
-          } catch (ex) {}
+        $("#cep2").blur(function() {
+          // Remove tudo o que não é número para fazer a pesquisa
+          var cep2 = this.value.replace(/[^0-9]/, "");
+          // Validação do CEP; caso o CEP não possua 8 números, então cancela
+          // a consulta
+          if (cep2.length != 8) {
+            return false;
+          }
+          // A url de pesquisa consiste no endereço do webservice + o cep que
+          // o usuário informou + o tipo de retorno desejado (entre "json",
+          // "jsonp", "xml", "piped" ou "querty")
+          var url = "https://viacep.com.br/ws/" + cep2 + "/json/";
+          // Faz a pesquisa do CEP, tratando o retorno com try/catch para que
+          // caso ocorra algum erro (o cep pode não existir, por exemplo) a
+          // usabilidade não seja afetada, assim o usuário pode continuar//
+          // preenchendo os campos normalmente
+          $.getJSON(url, function(dadosRetorno) {
+            try {
+              // Preenche os campos de acordo com o retorno da pesquisa
+              $("#endereco2").val(dadosRetorno.logradouro);
+              $("#cidade2").val(dadosRetorno.localidade);
+              $("#uf2").val(dadosRetorno.uf);
+            } catch (ex) {}
+          });
         });
-      });
-    </script>
-    <script>
-      contentItems = []
-      $('#butao2').click(function(e) {
-        e.preventDefault()
-        let item = {
-          'id_product': $('#idProduct').val(),
-          'cost_center': $('#cCusto').val(),
-          'content': $('#content').val(),
-          'quantity': $('#quantity').val(),
-          'value': $('#value').val(),
-        }
-        contentItems.push(item)
-        resetForm(contentItems)
-      });
-
-      function resetForm(items) {
-        $(".row-input").remove()
-        let show2 = "";
-        let cont = 0;
-        items.forEach(function(e) {
-          let form = $('form[name="formGeral"]');
-          let inputProduct = $("<input>").attr("name", "content_items\[" + cont + "\]\[id_product\]").attr("type", "hidden").attr("class", "row-input").val(e['id_product'])
-          let inputCostCenter = $("<input>").attr("name", "content_items\[" + cont + "\]\[cost_center\]").attr("type", "hidden").attr("class", "row-input").val(e['cost_center'])
-          let inputContent = $("<input>").attr("name", "content_items\[" + cont + "\]\[content\]").attr("type", "hidden").attr("class", "row-input").val(e['content'])
-          let inputQuantity = $("<input>").attr("name", "content_items\[" + cont + "\]\[quantity\]").attr("type", "hidden").attr("class", "row-input").val(e['quantity'])
-          let inputValue = $("<input>").attr("name", "content_items\[" + cont + "\]\[value\]").attr("type", "hidden").attr("class", "row-input").val(e['value'])
-          form.append(inputProduct)
-          form.append(inputCostCenter)
-          form.append(inputContent)
-          form.append(inputQuantity)
-          form.append(inputValue)
-          show2 += `
+      </script>
+      <script>
+         contentItems = []
+        $('#butao2').click(function(e) {
+          e.preventDefault()
+          let item = {
+            'id_product': $('#idProduct').val(),
+            'cost_center': $('#cCusto').val(),
+            'content': $('#content').val(),
+            'quantity': $('#quantity').val(),
+            'value': $('#value').val(),
+          }
+          contentItems.push(item)
+          resetForm(contentItems)
+        });
+         function resetForm(items) {
+             $(".row-input").remove()
+             let show2 = "";
+             let cont = 0;
+             items.forEach(function(e) {
+                 let form = $('form[name="formGeral"]');
+                 let inputProduct = $("<input>").attr("name", "content_items\[" + cont + "\]\[id_product\]").attr("type", "hidden").attr("class", "row-input").val(e['id_product'])
+                 let inputCostCenter = $("<input>").attr("name", "content_items\[" + cont + "\]\[cost_center\]").attr("type", "hidden").attr("class", "row-input").val(e['cost_center'])
+                 let inputContent = $("<input>").attr("name", "content_items\[" + cont + "\]\[content\]").attr("type", "hidden").attr("class", "row-input").val(e['content'])
+                 let inputQuantity = $("<input>").attr("name", "content_items\[" + cont + "\]\[quantity\]").attr("type", "hidden").attr("class", "row-input").val(e['quantity'])
+                 let inputValue = $("<input>").attr("name", "content_items\[" + cont + "\]\[value\]").attr("type", "hidden").attr("class", "row-input").val(e['value'])
+                 form.append(inputProduct)
+                 form.append(inputCostCenter)
+                 form.append(inputContent)
+                 form.append(inputQuantity)
+                 form.append(inputValue)
+                 show2 += `
             <div class="row g-2 my-0 tabela">
                 <tr class="row-product-${cont}">
                     <td scope="col">${e['id_product']}</td>
@@ -388,35 +367,34 @@
                 </tr>
                </div>
               `
-          cont++;
+                 cont++;
+             })
+             $('#show').html(show2);
+         }
+         function removerElemento(elementoClicado) {
+             $(".row-product-"+elementoClicado+"").remove()
+             contentItems.splice(elementoClicado,1)
+             resetForm(contentItems)
+         }
+      </script>
+      <script>
+        $(function Enviar() {
+          $('form[name="formGeral"]').submit(function(e) {
+            e.preventDefault();
+            $.ajax({
+              url: "{{route('dashboard.Conteudo')}}",
+              type: "POST",
+              data: $(this).serialize(),
+              success: function(data) {
+                console.log("Dados inseridos com sucesso!");
+                funcao_pdf(data.declaracao)
+              },
+              error: function(e) {
+                console.log(e);
+              }
+            });
+          })
         })
-        $('#show').html(show2);
-      }
-
-      function removerElemento(elementoClicado) {
-        $(".row-product-" + elementoClicado + "").remove()
-        contentItems.splice(elementoClicado, 1)
-        resetForm(contentItems)
-      }
-    </script>
-    <script>
-      $(function Enviar() {
-        $('form[name="formGeral"]').submit(function(e) {
-          e.preventDefault();
-          $.ajax({
-            url: "{{route('dashboard.Conteudo')}}",
-            type: "POST",
-            data: $(this).serialize(),
-            success: function(data) {
-              console.log("Dados inseridos com sucesso!");
-              funcao_pdf(data.declaracao)
-            },
-            error: function(e) {
-              console.log(e);
-            }
-          });
-        })
-      })
       //   function formatKeyUP(){
       //     axios.get("http://localhost:8000/api/dashboard/products/"+elementoClicado)
       //   .then((response) => {
@@ -430,25 +408,26 @@
       //    }
       //   });
       // }
-      /*
-      function funcao_pdf() {
-        var style = "<style>";
-        style = style + "table {width: 100%;font: 20px Calibri;}";
-        style = style + "table, th, td {border: solid 1px #DDDDDD; border-collapse: collapse;";
-        style = style + "padding: 2px 3px;text-align: center;}";
-        style = style + "</style>";
-        var pegar_dados2 = document.getElementById('remetente').value;
-        var janela = window.open('index_pdf', '', 'width=1000', height = "800");
-        janela.document.close();
-        janela.print();
-      };
-      */
-    </script>
+        /*
+        function funcao_pdf() {
+          var style = "<style>";
+          style = style + "table {width: 100%;font: 20px Calibri;}";
+          style = style + "table, th, td {border: solid 1px #DDDDDD; border-collapse: collapse;";
+          style = style + "padding: 2px 3px;text-align: center;}";
+          style = style + "</style>";
+          var pegar_dados2 = document.getElementById('remetente').value;
+          var janela = window.open('index_pdf', '', 'width=1000', height = "800");
+          janela.document.close();
+          janela.print();
+        };
+        */
+      </script>
 
 
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </x-app-layout>
 </body>
 
 </html>
+
