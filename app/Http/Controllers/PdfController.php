@@ -99,10 +99,14 @@ class PdfController extends Controller
 
 }
 
-public function pdfview($id){
+public function pdfview(){
+   //$id = DB::select('select id_declaracao from contents where id_declaracao = 3',[$id]);
+   //return response()->json(
+     // $id
 
-   $id = DB::select('select id_declaracao from contents where id_declaracao = 4', $id);
-    $filename = ($id.'.pdf');
+   //); 
+   $filename = '2.pdf';
+  //return  $filename;
         $file = storage_path(). "/app/public/PDF/". $filename;
         $headers = ['Content-Type: application/pdf'];
         return response()->file($file,  $headers);

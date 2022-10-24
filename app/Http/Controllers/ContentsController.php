@@ -8,6 +8,7 @@ use App\Models\ContentItem;
 use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
+use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
 
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Date\Date;
@@ -62,10 +63,20 @@ class ContentsController extends Controller
 
     public function download($declaracao) {
         $content = Content::find($declaracao);
-        return response()->download($content->file);
+        
+        $headers = ['Content-Type: application/pdf'];
+        return response()->file($content->file,  $headers);
+        
     }
+    public function Checkdownload($declaracao) {
+        $content = Content::find($declaracao);
+        $headers = ['Content-Type: application/pdf'];
+        return response()->file($content->file,  $headers);
+        
+    }
+    
 
-    private function generatePDF($request)
+    private function generatePDF()
     {
         $dompdf = new Dompdf(["enable_remote" => true]);
         ob_start();
@@ -77,7 +88,6 @@ class ContentsController extends Controller
         $filename = storage_path("app/public/pdfs/". md5(time()) .".pdf");
         file_put_contents($filename, $output);
         ob_end_flush();
-
         return $filename;
     }
 
