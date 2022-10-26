@@ -9,11 +9,12 @@ use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
 use Webklex\PDFMerger\Facades\PDFMergerFacade as PDFMerger;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use Jenssegers\Date\Date;
 use Barryvdh\DomPDF\Facade as PDF;
 use Laratrust\Traits\LaratrustUserTrait;
+use mysqli;
 
 class ContentsController extends Controller
 {
@@ -61,6 +62,7 @@ class ContentsController extends Controller
 
         return response()->json([
             "declaracao" => $content->id_declaracao,
+            "produto" => $contentItem->id_product,
             "filename" => $content->file
         ]);
     }
@@ -72,13 +74,25 @@ class ContentsController extends Controller
         return response()->file($content->file,  $headers);
         
     }
-    public function Checkdownload($declaracao) {
-        $content = Content::find($declaracao);
-        $headers = ['Content-Type: application/pdf'];
-        return response()->file($content->file,  $headers);
-        
-    }
+    // public function produto($id){
+
+    //     $id = ContentItem::select('select * from products where id_declaracao = ?', [$id]);
+
+    //     return response()->json(
+    //        $id
+
+    //     );       
+    //     }
     
+    public function fetch($id){
+        
+            $id = DB::select('select * from content_Items where id_product = ?', [$id]);
+    
+                return response()->json(
+                   $id
+    
+                );         
+            }
 
     private function generatePDF()
     {

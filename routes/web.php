@@ -27,6 +27,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
     Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
     Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
+    //Route::get('/dashboard/produto/{id}','App\Http\Controllers\ContentsController@produto')->name('dashboard.produto');
+    Route::get('/dashboard/fetch', 'App\Http\Controllers\ContentsController@fetch')->name('dashboard.fetch');
     });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
@@ -36,6 +38,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::post('/dashboard/store','App\Http\Controllers\AssetsController@store' )->name('dashboard.store');
     Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
+
     
     Route::get('/dashboard/pdfview','App\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
 

@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
-    public function products($id)
+    public function produtos($id)
     {   $id = new ContentItem();
         $id = DB::select('select * from content_items where id_product = ?', [$id]);
 

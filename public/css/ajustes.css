@@ -1,15 +1,20 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
-@import '~mdb-ui-kit/css/mdb.min.css';
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap");
+@import "~mdb-ui-kit/css/mdb.min.css";
 
 @keyframes pular {
-    0%, 20%, 60%, 100% {
+    0%,
+    20%,
+    60%,
+    100% {
         -webkit-transform: translateY(0);
         transform: translateY(0);
     }
+
     40% {
         -webkit-transform: translateY(-20px);
         transform: translateY(-20px);
     }
+
     80% {
         -webkit-transform: translateY(-10px);
         transform: translateY(-10px);
@@ -17,29 +22,29 @@
 }
 
 :root {
-    --cor-de-fundo: #E7E6E6B7;
-    --fonte-principal: 'Montserrat', sans-serif !important;
+    --cor-de-fundo: #e7e6e6b7;
+    --fonte-principal: "Montserrat", sans-serif !important;
     --cor-color-shadow: #000000;
-    --cor-drop-shadow: #1F1E1ECB;
-    --branco: #FFFFFF;
-    --branco2: #D3D3D3;
-    --cinza: #4747474B;
+    --cor-drop-shadow: #1f1e1ecb;
+    --branco: #ffffff;
+    --branco2: #d3d3d3;
+    --cinza: #4747474b;
     --cor-azul0: #5356ffa1;
-    --cor-azul1: #ADCFFC;
-    --cor-laranja0: #FCCB90;
-    --cor-laranja1: #FF8B06;
-    --cor-laranja2: #FF7300;
-    --cor-laranja3: #FC5C00;
-    --cor-vermelho0: #FF0000;
-    --cor-vermelho1: #A00000;
-    --cor-sombra: #3F3F3FBD;
+    --cor-azul1: #adcffc;
+    --cor-laranja0: #fccb90;
+    --cor-laranja1: #ff8b06;
+    --cor-laranja2: #ff7300;
+    --cor-laranja3: #fc5c00;
+    --cor-vermelho0: #ff0000;
+    --cor-vermelho1: #a00000;
+    --cor-sombra: #3f3f3fbd;
     --cor-borda: #000000;
 }
 
 .container {
     margin: 0.75rem auto 0.75rem auto;
     padding-bottom: 10px;
-    border-radius: .625rem;
+    border-radius: 0.625rem;
     width: 50.2rem;
 }
 
@@ -64,12 +69,12 @@
 }
 
 .form-check-input {
-    background-color: var(--cor-laranja1) !important;
-    border-color: var(--cor-laranja1) !important;
+    background-color: var(--cor-laranja1);
+    border-color: var(--cor-laranja1);
 }
 
 .form-label {
-    color: var(--cor-laranja1) !important;
+    color: var(--cor-laranja1);
 }
 
 .cascading-right {
@@ -84,10 +89,8 @@
     box-shadow: 4px 5px 15px var(--cor-sombra) !important;
 }
 
-.btn-danger {
-    left: 1rem !important;
-    position: relative !important;
-    display: block !important;
+.selector-for-some-widget {
+    box-sizing: content-box !important;
 }
 
 @media (max-width: 991.98px) {
