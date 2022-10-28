@@ -18,15 +18,13 @@ $contentItem = ContentItem::all();
     <link href="{{ URL::asset('css/declaracao.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/ajustes.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ URL::asset('css/bootstrap.mim.css') }}" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="{{ URL::asset('scss/mixins.scss') }}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css" rel="stylesheet">
-    <script src="{{asset('js/scripts.js')}}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.form/4.3.0/jquery.form.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{{asset('js/scripts.js')}}"></script>
+    <link href="{{ URL::asset('css/jquery-ui.min.css') }}" rel="stylesheet">
 
 
     @stack('javascript')
@@ -276,10 +274,10 @@ $contentItem = ContentItem::all();
                         <div class="row g-2 my-0">
                           <div class="col-6">
                             <label for="idProduto" class="form-label">ID do Produto:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')"  required />
+                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="idProduct" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')"  required />
                             <div class="col-4">
-                            <!-- <button class="btn " type="button" name="buscar" id="buscar" onclick="buscar()" >Buscar</button> -->
-                          </div>
+                              <!-- <button class="btn " type="button" name="buscar" id="buscar" onclick="buscar()" >Buscar</button> -->
+                            </div>
                           </div>
                           <div class="col-6">
                             <label for="cCusto" class="form-label">Centro de
@@ -290,7 +288,7 @@ $contentItem = ContentItem::all();
                           <div class="col-6">
                             <label for="Conteudo" class="form-label">Conteúdo do
                               pacote:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="content" id="content" onfocusout="verificarCampo('inputNome')"  required>
+                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="content" id="content" onfocusout="verificarCampo('inputNome')" required>
                           </div>
 
                           <div class="col-6">
@@ -301,7 +299,7 @@ $contentItem = ContentItem::all();
 
                           <div class="col-12">
                             <label for="Valor" class="form-label">Valor (R$):</label>
-                            <input Montserrat-labelledby billing class="form-control text-primary bg-light" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);" placeholder="R$0,00"  required>
+                            <input Montserrat-labelledby billing class="form-control text-primary bg-light" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);"  required>
                             <br>
                           </div>
 
@@ -362,7 +360,7 @@ $contentItem = ContentItem::all();
 
                     </div>
                   </div>
-                  </div>
+                </div>
       </form>
       </main>
     </form>
@@ -744,30 +742,62 @@ $contentItem = ContentItem::all();
         })
       })
 
-    
+
+      $(function() {
+        $('#idProduct').autocomplete({
+          source: function(request, response) {
+            console.log(request.term)
+            $.getJSON("{{url('/dashboard/products')}}?term=" + request.term, function(data) {
+              var array = $.map(data, function(row) {
+                return {
+                  value: row.id_product,
+                  label: row.content,
+                  content: row.content,
+                  sales_price: row.value
+                }
+              })
+
+              response($.ui.autocomplete.filter(array, request.term));
 
 
+            })
+          },
+          minLength: 1,
+          delay: 100,
+          select: function(event, ui) {
+            $('#content').val(ui.item.content)
+            $('#value').val(ui.item.sales_price)
+          }
+        })
+      })
+
+      $(function() {
+        $("input[name='idProduct']").blur(function(){
+          console.log("oi")
+          let id_product = $(this).val();
+          let content = $('#content');
+          let value = $('#value');
+
+          $.getJSON("{{url('/dashboard/TesteInput')}}", {id_product},
+            function(retorno){
+              $('#content').val(retorno.content);
+              $('#value').val(retorno.value);
+              // console.log($array_values);
+            }
+
+          );
+
+        })
+
+      });
 
 
-
-            /*
-            function funcao_pdf() {
-              var style = "<style>";
-              style = style + "table {width: 100%;font: 20px Calibri;}";
-              style = style + "table, th, td {border: solid 1px #DDDDDD; border-collapse: collapse;";
-              style = style + "padding: 2px 3px;text-align: center;}";
-              style = style + "</style>";
-              var pegar_dados2 = document.getElementById('remetente').value;
-              var janela = window.open('index_pdf', '', 'width=1000', height = "800");
-              janela.document.close();
-              janela.print();
-            };
-            */
+      
     </script>
 
-
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+
 </x-app-layout>
 </body>
 

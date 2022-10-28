@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Content;
 use App\Models\Asset;
+use PDO;
 use App\Models\ContentItem;
 use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
@@ -74,25 +75,44 @@ class ContentsController extends Controller
         return response()->file($content->file,  $headers);
         
     }
-    // public function produto($id){
+     public function products(Request $request){
+        if($request->has('term')){
+            return ContentItem::where('content','like','%'.$request->input('term').'%')->get();  
+        }
+        //  return ContentItem::select('id_product','content','value')->get();
+        //return ContentItem::all();
+            
+       }
 
-    //     $id = ContentItem::select('select * from products where id_declaracao = ?', [$id]);
-
-    //     return response()->json(
-    //        $id
-
-    //     );       
-    //     }
-    
-    public function fetch($id){
+        public function TesteInput(){
+            $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
         
-            $id = DB::select('select * from content_Items where id_product = ?', [$id]);
+            $id_product = filter_input(INPUT_GET, 'id_product', FILTER_UNSAFE_RAW);
+            if(!empty($id_product)){
     
-                return response()->json(
-                   $id
+                $limit = 1; 
+                $result_idProduct = "SELECT * FROM content_items WHERE id_product =:id_product LIMIT :limit";
+                $result_idProduct = $conn->prepare($result_idProduct);
+                $result_idProduct->bindParam(':id_product', $id_product, PDO::PARAM_STR);
+                $result_idProduct->bindParam(':limit', $limit, PDO::PARAM_INT);
+                $result_idProduct->execute();
     
-                );         
+                $array_values = array();
+    
+                if($result_idProduct->rowCount() != 0) {
+                $row_idProduct=$result_idProduct->fetch(PDO::FETCH_ASSOC);
+                $array_values['content'] = $row_idProduct['content'];
+                $array_values['value'] = $row_idProduct['value'];
+
+    
+                }else{
+                    $array_values['content'] = 'Produto não encontrado';
+                }
+                echo json_encode($array_values);
+                
             }
+        }
+    
 
     private function generatePDF()
     {

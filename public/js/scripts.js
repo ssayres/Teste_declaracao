@@ -237,19 +237,6 @@ function funcao_pdf(declaracao) {
 }
 
 
-function completar (){
-    $('#idProduct').autocomplete({
-        source: [
-            'Apple',
-            'Orange'
-        ],
-        select:function(e,data){
-            console.log(data)
-        }
-    });
-}
-
-
 
 
 
