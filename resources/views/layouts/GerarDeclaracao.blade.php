@@ -274,7 +274,7 @@ $contentItem = ContentItem::all();
                         <div class="row g-2 my-0">
                           <div class="col-6">
                             <label for="idProduto" class="form-label">ID do Produto:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="idProduct" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')"  required />
+                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="idProduct" name="idProduct" id="idProduct" onfocusout="verificarCampo('inputNome')" required />
                             <div class="col-4">
                               <!-- <button class="btn " type="button" name="buscar" id="buscar" onclick="buscar()" >Buscar</button> -->
                             </div>
@@ -282,7 +282,7 @@ $contentItem = ContentItem::all();
                           <div class="col-6">
                             <label for="cCusto" class="form-label">Centro de
                               custo:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')" required />
+                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')" / required />
                           </div>
 
                           <div class="col-6">
@@ -299,7 +299,7 @@ $contentItem = ContentItem::all();
 
                           <div class="col-12">
                             <label for="Valor" class="form-label">Valor (R$):</label>
-                            <input Montserrat-labelledby billing class="form-control text-primary bg-light" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);"  required>
+                            <input Montserrat-labelledby billing class="form-control text-primary bg-light" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);" required>
                             <br>
                           </div>
 
@@ -791,8 +791,6 @@ $contentItem = ContentItem::all();
 
       });
 
-
-      
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

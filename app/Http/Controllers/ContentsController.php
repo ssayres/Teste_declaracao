@@ -6,6 +6,7 @@ use App\Models\Content;
 use App\Models\Asset;
 use PDO;
 use App\Models\ContentItem;
+use App\Models\CustomProducts;
 use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
