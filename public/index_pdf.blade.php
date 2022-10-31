@@ -28,22 +28,21 @@ use App\Models\ContentItem;
 
     <!-- <link rel="stylesheet" href="public/css/index-pdf.css"> -->
     <?php
-    
+
     use PDO;
-    
+
     /* 	$usuario = "viaexp72_viaport";
         $senha = "j+pW(Ye^&S4u";
         $dbname = "viaexp72_viaexpressaportaria"; */
-    
+
     //Criar a conexao
     $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
     $sql = 'SELECT id_declaracao FROM contents ORDER BY id_declaracao DESC LIMIT 1';
     $stmt = $conn->prepare($sql);
     $stmt->execute();
-    $rows = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    
+    $rows = ($stmt->fetchAll(PDO::FETCH_ASSOC));
     //print_r($rows);
-    
+
     if (!$conn) {
         die("Falha na conexao: " . mysqli_connect_error());
     } else {
@@ -123,6 +122,7 @@ use App\Models\ContentItem;
             margin-right: 5rem !important;
         }
 
+
         .assinatura {
             margin-right: 12rem;
         }
@@ -137,6 +137,10 @@ use App\Models\ContentItem;
             margin-right: 0.2rem;
         }
     </style>
+    <?php foreach ($rows as $row) { ?>
+
+        <h5 class="dcl">DCL00<?php echo $row['id_declaracao'] + '1' ?></h5>
+    <?php } ?>
 
 </head>
 
@@ -146,16 +150,13 @@ use App\Models\ContentItem;
             <div class="container-fluid">
                 </br>
                 <table>
-                <?php foreach ($rows as $row) { ?>
-                    <th>ID Declaração</th>
-                            <td>DCL00<?php echo $row['id_declaracao'] ?></td>
-                            <?php } ?> 
+
                 </table>
                 <table class="bordered striped ">
                     <caption>Remetente</caption>
                     <thead>
                         <tr>
-                            
+
                             <th>Nome</th>
                             <th>CPF/CNPJ</th>
                             <th>Endereço</th>

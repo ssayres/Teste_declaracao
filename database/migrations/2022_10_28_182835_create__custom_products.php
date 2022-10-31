@@ -13,7 +13,7 @@ class CreateCustomProducts extends Migration
      */
     public function up()
     {
-        Schema::create('CustomProducts', function (Blueprint $table) {
+        Schema::create('custom_products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('id_content');
             $table->integer('id_product');
@@ -21,9 +21,6 @@ class CreateCustomProducts extends Migration
             $table->string('content');
             $table->integer('quantity');
             $table->decimal('value');
-            $table->foreign('id_content')
-                ->references('id_declaracao')->on('contents')
-                ->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

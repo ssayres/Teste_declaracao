@@ -131,12 +131,12 @@ $contentItem = ContentItem::all();
 
                         <div class="col-6">
                           <label for="inputContato" class="form-label">Contato:</label>
-                          <input type="text" placeholder="Digite o nome completo" class="form-control text-primary bg-light" Montserrat-labelledby billing name="contato" id="contato" required>
+                          <input type="text" placeholder="Digite o nome completo" class="form-control text-primary bg-light" Montserrat-labelledby billing name="contato" id="contato" >
                         </div>
 
                         <div class="col-6">
                           <label for="inputContato" class="form-label">Telefone/Celular:</label>
-                          <input type="tel" placeholder="(xx) x-xxxx-xxxx" class="form-control text-primary bg-light" Montserrat-labelledby billing name="telefone" id="telefone" maxlength="15" onkeyup="handlePhone(event)" required>
+                          <input type="tel" placeholder="(xx) x-xxxx-xxxx" class="form-control text-primary bg-light" Montserrat-labelledby billing name="telefone" id="telefone" maxlength="15" onkeyup="handlePhone(event)" >
                         </div>
 
                         <div class="form-check form-switch g-0 my-4 salvar">
@@ -159,7 +159,7 @@ $contentItem = ContentItem::all();
 
                             <div class="col-7">
                               <label for="inputNome" class="form-label">Destinatário:</label>
-                              <input list="nomes" type="text" placeholder="O nome do Destinatário" class="form-control text-primary bg-light" Montserrat-labelledby billing name="destinatario" id="destinatario" required>
+                              <input list="nomes" type="text" placeholder="O nome do Destinatário" class="form-control text-primary bg-light" Montserrat-labelledby billing name="destinatario" id="destinatario"  required>
                             </div>
                           </div>
 
@@ -282,13 +282,13 @@ $contentItem = ContentItem::all();
                           <div class="col-6">
                             <label for="cCusto" class="form-label">Centro de
                               custo:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')" / required />
+                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="cCusto" id="cCusto" onfocusout="verificarCampo('inputNome')"  required />
                           </div>
 
                           <div class="col-6">
                             <label for="Conteudo" class="form-label">Conteúdo do
                               pacote:</label>
-                            <input list="" type="text" placeholder="Digite aqui..." class="form-control text-primary bg-light" Montserrat-labelledby billing name="content" id="content" onfocusout="verificarCampo('inputNome')" required>
+                            <input list="" type="text"  class="form-control text-primary bg-light1" Montserrat-labelledby billing name="content" id="content" onfocusout="verificarCampo('inputNome')" disabled required>
                           </div>
 
                           <div class="col-6">
@@ -299,7 +299,7 @@ $contentItem = ContentItem::all();
 
                           <div class="col-12">
                             <label for="Valor" class="form-label">Valor (R$):</label>
-                            <input Montserrat-labelledby billing class="form-control text-primary bg-light" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);" required>
+                            <input Montserrat-labelledby billing class="form-control text-primary bg-light1" id="value" name="value" onfocusout="verificarCampo('inputNome')" onkeyup="atacado(this);" disabled required>
                             <br>
                           </div>
 
@@ -763,7 +763,7 @@ $contentItem = ContentItem::all();
             })
           },
           minLength: 1,
-          delay: 100,
+          delay: 60,
           select: function(event, ui) {
             $('#content').val(ui.item.content)
             $('#value').val(ui.item.sales_price)

@@ -7,6 +7,7 @@ use App\Models\Asset;
 use PDO;
 use App\Models\ContentItem;
 use App\Models\CustomProducts;
+use App\Models\Products;
 use Dompdf\Dompdf;
 use Illuminate\Auth\EloquentUserProvider;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Jenssegers\Date\Date;
 use Barryvdh\DomPDF\Facade as PDF;
 use Laratrust\Traits\LaratrustUserTrait;
-use mysqli;
+
 
 class ContentsController extends Controller
 {
@@ -78,7 +79,7 @@ class ContentsController extends Controller
     }
      public function products(Request $request){
         if($request->has('term')){
-            return ContentItem::where('content','like','%'.$request->input('term').'%')->get();  
+            return CustomProducts::where('content','like','%'.$request->input('term').'%')->get();  
         }
         //  return ContentItem::select('id_product','content','value')->get();
         //return ContentItem::all();
@@ -92,7 +93,7 @@ class ContentsController extends Controller
             if(!empty($id_product)){
     
                 $limit = 1; 
-                $result_idProduct = "SELECT * FROM content_items WHERE id_product =:id_product LIMIT :limit";
+                $result_idProduct = "SELECT * FROM custom_products WHERE id_product =:id_product LIMIT :limit";
                 $result_idProduct = $conn->prepare($result_idProduct);
                 $result_idProduct->bindParam(':id_product', $id_product, PDO::PARAM_STR);
                 $result_idProduct->bindParam(':limit', $limit, PDO::PARAM_INT);

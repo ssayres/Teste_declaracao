@@ -24,10 +24,10 @@ Route::get('/', function () {
 //rota para os dois usuários
 Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
+    Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
      Route::get('/dashboard/TesteInput','App\Http\Controllers\ContentsController@TesteInput')->name('dashboard.TesteInput');
      Route::get('/dashboard/products','App\Http\Controllers\ContentsController@products')->name('dashboard.products');
     Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
-    Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
     Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
     
     //Route::get('/dashboard/products','App\Http\Controllers\ContentsController@products')->name('dashboard.products');

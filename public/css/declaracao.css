@@ -287,7 +287,9 @@ tr td {
 
     width: 20% !important;
 }
-
+.bg-light1 {
+    background-color: #dbdbdc !important;
+}
 /*.dd {*/
 /*    width: 1000px !important;*/
 /*}*/
