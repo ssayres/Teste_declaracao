@@ -318,25 +318,23 @@ $contentItem = ContentItem::all();
 
                         <div class="row g-2 my-0">
 
-                          <div class="row g-2 my-0 tabela">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                            <tr class="">
+                                                <th class="dd" scope="col">IDProduto</th>
+                                                <th class="dd" scope="col">CentroCusto</th>
+                                                <th class="dd" scope="col">Quantidade</th>
+                                                <th class="dd" scope="col">Conteúdo</th>
+                                                <th class="dd" scope="col">Valor</th>
+                                                <th class="dd" scope="col"></th>
+                                            </tr>
+                                            </thead>
+                                            <tbody id="show">
 
-                            <table class="table table-bordered">
-                              <thead>
-                                <th scope="col">IdProduto</th>
-                                <th scope="col">CentroCusto</th>
-                                <th scope="col">Qtd</th>
-                                <th scope="col">Conteúdo</th>
-                                <th scope="col">Valor</th>
-                                <th scope="col">#</th>
-                              </thead>
-                              <tbody id="show">
-
-                              </tbody>
-                            </table>
-
-
-                          </div>
-                        </div>
+                                            </tbody>
+                                        </table>
+                                    </div>
 
 
                     </form>
@@ -701,16 +699,26 @@ $contentItem = ContentItem::all();
           form.append(inputQuantity)
           form.append(inputValue)
           show2 += `
-            <div class="row g-2 my-0 tabela">
-                <tr class="row-product-${cont}">
-                    <td scope="col">${e['id_product']}</td>
-                    <td scope="col">${e['cost_center']}</td>
-                    <td scope="col">${e['content']}</td>
-                    <td scope="col">${e['quantity']}</td>
-                    <td scope="col">${e['value']}</td>
-                    <td scope="col" nowrap><button class="apagar" onclick="removerElemento(${cont})">🗑️<button><td>
-                </tr>
-               </div>
+          <div class="">
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            <tr class="align-bottom row-product-${cont}">
+                                <td class="dd">${e['id_product']}</td>
+                                <td class="dd">${e['cost_center']}</td>
+                                <td class="dd">${e['content']}</td>
+                                <td class="dd">${e['quantity']}</td>
+                                <td class="dd">${e['value']}</td>
+                                <td><a class="bi-github" onclick="removerElemento(${cont})">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                                        <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                    </svg></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
               `
           cont++;
         })
