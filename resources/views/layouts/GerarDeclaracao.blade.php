@@ -25,31 +25,20 @@ $contentItem = ContentItem::all();
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="{{asset('js/scripts.js')}}"></script>
     <link href="{{ URL::asset('css/jquery-ui.min.css') }}" rel="stylesheet">
-
-
     @stack('javascript')
-
-
-
-
   </head>
-
   <body>
     <!-- Container que é o pai de todos os elementos da página. action="{{route('dashboard.Conteudo')}}" method="post" -->
     <form class="divFormu container responsive-sm" id="formGeral" name="formGeral" enctype="multipart/form-data">
       <form class="form-estrutura">
         @csrf
         <div class="row row-cols-12 content-page">
-
           <!-- Formulário que é exibido a esquerda da página. -->
           <div class="form-container col-6">
-
             <main>
-
               <div class="container">
                 <div class="form-container">
                   <div class="form-product row g-1 my-0">
-
                     <p></p>
                     <h1>Remetente</h1>
 

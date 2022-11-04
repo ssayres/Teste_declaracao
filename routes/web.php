@@ -18,7 +18,7 @@ use App\Http\Controllers\PdfController;
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 //rota para os dois usuários
@@ -30,8 +30,8 @@ Route::group(['middleware' => ['auth']], function(){
     Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
     Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
     
-    //Route::get('/dashboard/products','App\Http\Controllers\ContentsController@products')->name('dashboard.products');
-    //Route::get('/dashboard/autocomplete', 'App\Http\Controllers\ContentsController@autocomplete')->name('dashboard.autocomplete');
+    
+  
     });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
@@ -45,9 +45,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function(){
     Route::get('/dashboard/pdfview','App\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
 
 
-    //Route::get('/dashboard/Conteudo', 'App\Http\Controllers\DashBoardController@Conteudo')->name('dashboard.Conteudo');
-    //Route::post('/dashboard/GerarDeclaracao', 'App\Http\Controllers\Declaracao@EnviarAoBanco')->name('dashboard.EnviarAoBanco');
-
+   
 });
 
 

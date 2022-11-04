@@ -70,51 +70,51 @@ class ContentsController extends Controller
         ]);
     }
 
-    public function download($declaracao) {
+    public function download($declaracao)
+    {
         $content = Content::find($declaracao);
-        
+
         $headers = ['Content-Type: application/pdf'];
         return response()->file($content->file,  $headers);
-        
     }
-     public function products(Request $request){
-        if($request->has('term')){
-            return CustomProducts::where('content','like','%'.$request->input('term').'%')->get();  
+    public function products(Request $request)
+    {
+        if ($request->has('term')) {
+            return CustomProducts::where('content', 'like', '%' . $request->input('term') . '%')->get();
         }
         //  return ContentItem::select('id_product','content','value')->get();
         //return ContentItem::all();
-            
-       }
 
-        public function TesteInput(){
-            $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
-        
-            $id_product = filter_input(INPUT_GET, 'id_product', FILTER_UNSAFE_RAW);
-            if(!empty($id_product)){
-    
-                $limit = 1; 
-                $result_idProduct = "SELECT * FROM custom_products WHERE id_product =:id_product LIMIT :limit";
-                $result_idProduct = $conn->prepare($result_idProduct);
-                $result_idProduct->bindParam(':id_product', $id_product, PDO::PARAM_STR);
-                $result_idProduct->bindParam(':limit', $limit, PDO::PARAM_INT);
-                $result_idProduct->execute();
-    
-                $array_values = array();
-    
-                if($result_idProduct->rowCount() != 0) {
-                $row_idProduct=$result_idProduct->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function TesteInput()
+    {
+        $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
+        //$conn = new PDO('mysql:host=108.167.132.188;dbname=viaexp72_db_declaracao', 'viaexp72_declaracaoPort', '32010573Bbc@@');
+
+        $id_product = filter_input(INPUT_GET, 'id_product', FILTER_UNSAFE_RAW);
+        if (!empty($id_product)) {
+
+            $limit = 1;
+            $result_idProduct = "SELECT * FROM custom_products WHERE id_product =:id_product LIMIT :limit";
+            $result_idProduct = $conn->prepare($result_idProduct);
+            $result_idProduct->bindParam(':id_product', $id_product, PDO::PARAM_STR);
+            $result_idProduct->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $result_idProduct->execute();
+
+            $array_values = array();
+
+            if ($result_idProduct->rowCount() != 0) {
+                $row_idProduct = $result_idProduct->fetch(PDO::FETCH_ASSOC);
                 $array_values['content'] = $row_idProduct['content'];
                 $array_values['value'] = $row_idProduct['value'];
-
-    
-                }else{
-                    $array_values['content'] = 'Produto não encontrado';
-                }
-                echo json_encode($array_values);
-                
+            } else {
+                $array_values['content'] = 'Produto não encontrado';
             }
+            echo json_encode($array_values);
         }
-    
+    }
+
 
     private function generatePDF()
     {
@@ -125,7 +125,7 @@ class ContentsController extends Controller
         $dompdf->setPaper('A4', '');
         $dompdf->render();
         $output = $dompdf->output();
-        $filename = storage_path("app/public/pdfs/". md5(time()) .".pdf");
+        $filename = storage_path("app/public/pdfs/" . md5(time()) . ".pdf");
         file_put_contents($filename, $output);
         ob_end_flush();
         return $filename;
@@ -138,17 +138,11 @@ class ContentsController extends Controller
         $data = Content::all();
 
         return view('/layouts/Historico', ['contents' => $data]);
-
-
-
     }
     public function Teste()
     {
         $data = Content::all();
 
         return view('/layouts/Teste', ['contents' => $data]);
-
     }
-
 }
-

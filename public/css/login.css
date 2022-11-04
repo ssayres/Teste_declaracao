@@ -1,0 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400&display=swap');
+
+:root {
+    --cor-de-fundo: #E7E6E6B7;
+    --fonte-principal: 'Montserrat', sans-serif !important;
+    --cor-color-shadow: #000000;
+    --cor-drop-shadow: #1F1E1ECB;
+    --branco: #FFFFFF;
+    --branco2: #D3D3D3;
+    --cinza: #4747474B;
+    --cor-laranja0: #FCCB90;
+    --cor-laranja1: #FF8B06;
+    --cor-laranja2: #FF7300;
+    --cor-laranja3: #FC5C00;
+    --cor-vermelho: #FF0000;
+}
+
+* {
+    color: var(--cor-color-shadow);
+    padding: 0;
+    margin: 0;
+}
+
+html {
+    background-color: var(--cor-de-fundo);
+}
+
+body {
+    background-color: var(--cor-de-fundo);
+    font-family: var(--fonte-principal);
+}
+
+p {
+    text-align: center !important;
+}
+
+/*.btn {*/
+/*    width: 100%;*/
+/*    box-shadow: 1px 1px 5px var(--cor-sombra) !important;*/
+/*    white-space: nowrap !important;*/
+/*    animation: pular 1s;*/
+/*    text-decoration: none !important;*/
+/*    color: var(--branco) !important;*/
+/*    border-radius: 30px !important;*/
+/*}*/
+
+.form-label {
+    color: var(--cor-laranja1) !important;
+}
+
+.senha {
+    text-align: center !important;
+}
+
+.gradient-custom-2 {
+    /* fallback for old browsers */
+    background: #fccb90;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, #fa6000, #ff8b06, #ff8b06, #ff8b06);
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, #ff5100, #f8760c, #f8760c, #ee9624);
+}
+
+.container {
+    border-radius: 40% !important;
+    filter: drop-shadow(2px 1px 8px var(--cor-drop-shadow));
+}
+
+@media (min-width: 768px) {
+    .gradient-form {
+        height: 100vh !important;
+    }
+}
+@media (min-width: 769px) {
+    .gradient-custom-2 {
+        border-top-right-radius: .3rem;
+        border-bottom-right-radius: .3rem;
+    }
+}

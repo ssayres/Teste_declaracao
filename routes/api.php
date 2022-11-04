@@ -20,4 +20,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     
 });
 
-Route::get('dashboard/products/{id}','App\Http\Controllers\ProductsController@products')->name('dashboard.products');
+// Route::get('dashboard/products/{id}','App\Http\Controllers\ProductsController@products')->name('dashboard.products');

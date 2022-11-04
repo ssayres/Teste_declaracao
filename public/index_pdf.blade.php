@@ -37,6 +37,7 @@ use App\Models\ContentItem;
 
     //Criar a conexao
     $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
+    //$conn = new PDO('mysql:host=108.167.132.188;dbname=viaexp72_db_declaracao', 'viaexp72_declaracaoPort', '32010573Bbc@@');
     $sql = 'SELECT id_declaracao FROM contents ORDER BY id_declaracao DESC LIMIT 1';
     $stmt = $conn->prepare($sql);
     $stmt->execute();
