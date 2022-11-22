@@ -89,8 +89,8 @@ class ContentsController extends Controller
 
     public function TesteInput()
     {
-        $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
-        //$conn = new PDO('mysql:host=108.167.132.188;dbname=viaexp72_db_declaracao', 'viaexp72_declaracaoPort', '32010573Bbc@@');
+         $conn = new PDO('mysql:host=localhost;dbname=db_declaracao', 'root', '');
+        //  $conn = new PDO('mysql:host=108.167.132.188;dbname=viaexp72_db_declaracao', 'viaexp72_declaracaoPort', '32010573Bbc@@');
 
         $id_product = filter_input(INPUT_GET, 'id_product', FILTER_UNSAFE_RAW);
         if (!empty($id_product)) {
@@ -120,6 +120,7 @@ class ContentsController extends Controller
     {
         $dompdf = new Dompdf(["enable_remote" => true]);
         ob_start();
+        ob_implicit_flush(true);
         require public_path("index_pdf.blade.php");
         $dompdf->loadHtml(ob_get_clean());
         $dompdf->setPaper('A4', '');
@@ -127,7 +128,7 @@ class ContentsController extends Controller
         $output = $dompdf->output();
         $filename = storage_path("app/public/pdfs/" . md5(time()) . ".pdf");
         file_put_contents($filename, $output);
-        ob_end_flush();
+        if (ob_get_contents()) ob_end_clean();
         return $filename;
     }
 
@@ -145,4 +146,5 @@ class ContentsController extends Controller
 
         return view('/layouts/Teste', ['contents' => $data]);
     }
+    
 }

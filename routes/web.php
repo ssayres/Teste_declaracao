@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ContentsController;
+use app\Http\Controllers\HomeController;
 use App\Http\Controllers\PdfController;
-
+use app\Providers\RouteServiceProvider;
+use app\Http\Controllers\DashBoardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,12 +24,14 @@ Route::get('/', function () {
 
 //rota para os dois usuários
 Route::group(['middleware' => ['auth']], function(){
-    Route::get('/dashboard', 'App\Http\Controllers\DashboardController@index')->name('dashboard');
-    Route::post('/dashboard/Conteudo', 'App\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
-     Route::get('/dashboard/TesteInput','App\Http\Controllers\ContentsController@TesteInput')->name('dashboard.TesteInput');
-     Route::get('/dashboard/products','App\Http\Controllers\ContentsController@products')->name('dashboard.products');
-    Route::get('/dashboard/GerarDeclaracao', 'App\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
-    Route::get('/dashboard/download/{declaracao}','App\Http\Controllers\ContentsController@download')->name('dashboard.download');
+
+    Route::get('/dashboard','App\Http\Controllers\DashBoardController@index')->name('dashboard');
+    Route::get('/dashboard','App\Http\Controllers\DashBoardController@editar')->name('dashboard');
+    Route::post('/dashboard/Conteudo', 'app\Http\Controllers\ContentsController@Conteudo')->name('dashboard.Conteudo');
+     Route::get('/dashboard/TesteInput','app\Http\Controllers\ContentsController@TesteInput')->name('dashboard.TesteInput');
+     Route::get('/dashboard/products','app\Http\Controllers\ContentsController@products')->name('dashboard.products');
+    Route::get('/dashboard/GerarDeclaracao', 'app\Http\Controllers\DashBoardController@GerarDeclaracao')->name('dashboard.GerarDeclaracao');
+    Route::get('/dashboard/download/{declaracao}','app\Http\Controllers\ContentsController@download')->name('dashboard.download');
     
     
   
@@ -36,13 +39,14 @@ Route::group(['middleware' => ['auth']], function(){
 
 Route::group(['middleware' => ['auth', 'role:admin']], function(){
    
-    Route::get('/dashboard/Historico','App\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
+    
+    Route::get('/dashboard/Historico','app\Http\Controllers\ContentsController@Historico' )->name('dashboard.Historico');
     //Route::get('/dashboard/teste','App\Http\Controllers\ContentsController@teste' )->name('dashboard.teste');
-    Route::post('/dashboard/index_pdf','App\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
+    Route::post('/dashboard/index_pdf','app\Http\Controllers\PdfController@CDF' )->name('dashboard.index_pdf');
     //Route::post('/dashboard/store','App\Http\Controllers\AssetsController@store' )->name('dashboard.store');
-    Route::get('/dashboard/getPDF','App\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
+    Route::get('/dashboard/getPDF','app\Http\Controllers\PdfController@getPDF')->name('dashboard.getPDF');
 
-    Route::get('/dashboard/pdfview','App\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
+    Route::get('/dashboard/pdfview','app\Http\Controllers\PdfController@pdfview')->name('dashboard.pdfview');
 
 
    
